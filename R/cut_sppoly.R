@@ -2,7 +2,6 @@
 #' @param df a 2-variable dataframe
 #' @importFrom sp SpatialPoints
 #' @return a list of single-point SpatialPoints
-#' @internal
 df2splist <- function(df) {
   lapply(split(df, 1:nrow(df)), SpatialPoints)
 }
@@ -14,7 +13,6 @@ df2splist <- function(df) {
 #' @param poly_coord_df a data frame of coordinates with first column being the
 #' longitude and the second column being the latitude.
 #' @importFrom rgeos gDistance
-#' @internal
 dist_pt_poly <- function(pt, poly_coord_df) {
   sapply(df2splist(poly_coord_df), gDistance, pt)
 }
@@ -29,7 +27,6 @@ dist_pt_poly <- function(pt, poly_coord_df) {
 #' @param pt2 A single-point SpatialPoint object as defined in the sp package.
 #' @return a list of 2 2-variable data frames of coordinates. In each data frame
 #' the first column is the longitude and the second column is the latitude.
-#' @internal
 cut_poly <- function(poly, pt1, pt2) {
   poly_coord_df <- as.data.frame(poly@coords)
 # finds the points of the polygon that are closest to pt1 and pt2:
