@@ -2,7 +2,7 @@
 % Please edit documentation in R/largest_polygons.R
 \name{largest_polygons}
 \alias{largest_polygons}
-\title{Filter the Largest Polygons of each polygon slot of a SpatialPolygon* object}
+\title{Filter the Largest Polygon of each polygon slot of a SpatialPolygon* object}
 \usage{
 largest_polygons(sppoly, subset)
 }
@@ -17,7 +17,7 @@ An object of the same class as \code{sppoly} where each slot of the
 the largest \code{Polygon} is the input \code{sppoly}.
 }
 \description{
-Filter the Largest Polygons of each polygon slot of a SpatialPolygon* object
+Filter the Largest Polygon of each polygon slot of a SpatialPolygon* object
 }
 \examples{
 vn_prov <- gadmVN::gadm()
@@ -35,4 +35,7 @@ sp::plot(vn_prov3)
 vn_prov4 <- largest_polygons(vn_prov, province \%in\% c("Da Nang", "Khanh Hoa"))
 sp::plot(vn_prov4)
 
+}
+\seealso{
+\code{\link[sptools]{rm_largest_polygons}}
 }

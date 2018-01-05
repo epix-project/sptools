@@ -3,18 +3,20 @@
 .largest_polygons <- function(sppoly) {
   surfaces <- areas(sppoly)
   sppoly@polygons <- Map(function(x, y, z) {
-    x@Polygons <- x@Polygons[y]
-    x@plotOrder <- 1L
-    x@area <- z
-    checkPolygonsHoles(x)},
-    sppoly@polygons,
-    sapply(surfaces, which.max),
-    sapply(surfaces, max))
+                           x@Polygons <- x@Polygons[y]
+                           x@plotOrder <- 1L
+                           x@area <- z
+                           checkPolygonsHoles(x)},
+                         sppoly@polygons,
+                         sapply(surfaces, which.max),
+                         sapply(surfaces, max))
   sppoly
 }
 
 
-#' Filter the Largest Polygons of each polygon slot of a SpatialPolygon* object
+
+
+#' Filter the Largest Polygon of each polygon slot of a SpatialPolygon* object
 #'
 #' @param sppoly \code{SpatialPolygon*} object as defined in package \code{sp}.
 #' @param subset a subsetting condition
@@ -22,6 +24,8 @@
 #' @return An object of the same class as \code{sppoly} where each slot of the
 #' \code{polygons} element is made on one single \code{Polygon} object that is
 #' the largest \code{Polygon} is the input \code{sppoly}.
+#'
+#' @seealso \code{\link[sptools]{rm_largest_polygons}}
 #'
 #' @importFrom rgeos gEnvelope
 #'
@@ -64,3 +68,5 @@ largest_polygons <- function(sppoly, subset) {
   sppoly@bbox <- gEnvelope(sppoly)@bbox
   sppoly
 }
+
+
