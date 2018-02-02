@@ -10,7 +10,6 @@
 #' inputed \code{SpatialPolygon*} object.
 #'
 #' @importFrom sp identicalCRS over spTransform
-#' @importFrom rgeos gIntersection
 #'
 #' @export
 #'
@@ -52,7 +51,6 @@
 #' plot(stations, add = TRUE, col = "red")
 #' plot(stations5, add = TRUE, col = "blue")
 points_in_polygon <- function(points, polygon) {
-  if(!identicalCRS(points, polygon))
-    polygon <- spTransform(polygon, crs(points))
-  suppressWarnings(gIntersection(points, polygon)) # suppressWarning could be suppressed with a version of sp > 1.2-5.
+  if (!identicalCRS(points, polygon)) polygon <- spTransform(polygon, crs(points))
+  points[complete.cases(over(points, polygon)), ]
 }
