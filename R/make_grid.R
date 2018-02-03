@@ -11,6 +11,7 @@
 #' approximately equal to \code{n}.
 #'
 #' @importFrom sp makegrid SpatialPointsDataFrame
+#' @importFrom rgeos gArea
 #'
 #' @export
 #'
