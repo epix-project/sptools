@@ -15,7 +15,7 @@
 #' @export
 #'
 apply_pts_by_poly <- function(points, polygons, var, f, ...) {
-  lapply(polygons, function(polygon)
+  sapply(polygons, function(polygon)
                      points_in_polygon(points, polygon) %>%
                      `[[`(var) %>%
                      f(...))
