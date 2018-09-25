@@ -21,8 +21,10 @@ Returns a list of the areas of all the \code{Polygon} objects of the polygons
 slot of a \code{SpatialPolygon*} object.
 }
 \examples{
+library(sf)
 # working on the provinces polygons of Vietnam:
 vn_prov <- gadmVN::gadm()
+vn_prov <- sf::as_Spatial(vn_prov)
 poly_areas <- areas(vn_prov)
 # we can see that some of the polygons are made of several polygons:
 sapply(poly_areas, length)
