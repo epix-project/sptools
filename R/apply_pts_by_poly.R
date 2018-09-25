@@ -6,12 +6,13 @@
 #'
 #' @param points a `SpatialPointsDataFrame` object.
 #' @param polygons a `SpatialPolygonsDataFrame` object.
-#' @var the name of the variable of `points` on which to apply the function `f`.
-#' @f the function to be applied.
+#' @param var the name of the variable of `points` on which to apply the
+#' function `f`.
+#' @param f the function to be applied.
+#' @param ... arguments to passed in `sptools::points_in_polygon`
 #'
 #' @author Marc Choisy
 #'
-#' @importFrom magrittr %>%
 #' @export
 #'
 apply_pts_by_poly <- function(points, polygons, var, f, ...) {

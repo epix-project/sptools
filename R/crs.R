@@ -2,6 +2,8 @@
 #'
 #' Retrieve the CRS of a Spatial* Object
 #'
+#' @param spobject an object of class Spatial
+#'
 #' @return A CRS object as defined in the \code{sp} package.
 #'
 #' @export

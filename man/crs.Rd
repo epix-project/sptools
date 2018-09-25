@@ -6,6 +6,9 @@
 \usage{
 crs(spobject)
 }
+\arguments{
+\item{spobject}{an object of class Spatial}
+}
 \value{
 A CRS object as defined in the \code{sp} package.
 }

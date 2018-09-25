@@ -10,6 +10,7 @@
 #' @author Marc Choisy
 #'
 #' @importFrom countrycode countrycode
+#' @importFrom utils download.file
 #' @export
 gadm <- function(country, format, level) {
   country <- countrycode(country, "country.name", "iso3c")

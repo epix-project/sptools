@@ -42,6 +42,7 @@ cut_poly <- function(poly, pt1, pt2) {
 #x <- vn_prov@polygons[[1]]@Polygons[[1]]
 
 #' @importFrom sp Line Lines SpatialLines
+#' @importFrom methods slot
 cut_sppoly <- function(sppoly, pt1, pt2) {
 #  vn_prov@polygons[[1]]@Polygons
   f1 <- function(x, pt1, pt2) lapply(x, cut_poly, pt1, pt2)

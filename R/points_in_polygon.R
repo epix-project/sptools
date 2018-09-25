@@ -10,6 +10,7 @@
 #' inputed \code{SpatialPolygon*} object.
 #'
 #' @importFrom sp identicalCRS over spTransform
+#' @importFrom stats complete.cases
 #'
 #' @export
 #'

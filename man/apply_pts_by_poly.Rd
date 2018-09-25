@@ -10,6 +10,13 @@ apply_pts_by_poly(points, polygons, var, f, ...)
 \item{points}{a `SpatialPointsDataFrame` object.}
 
 \item{polygons}{a `SpatialPolygonsDataFrame` object.}
+
+\item{var}{the name of the variable of `points` on which to apply the
+function `f`.}
+
+\item{f}{the function to be applied.}
+
+\item{...}{arguments to passed in `sptools::points_in_polygon`}
 }
 \description{
 This function is a wrapper aroud the `sptools::points_in_polygon` and applies
