@@ -26,4 +26,5 @@ Imports:
     methods,
     sf,
     dplyr,
-    purrr
+    purrr,
+    tidyr

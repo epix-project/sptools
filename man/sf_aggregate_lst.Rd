@@ -4,19 +4,16 @@
 \alias{sf_aggregate_lst}
 \title{Aggregates sf from a list of event}
 \usage{
-sf_aggregate_lst(df_sf, history_lst, sel = "province", from,
-  to = "2018-12-31")
+sf_aggregate_lst(df_sf, history_lst, from, to = "2018-12-31")
 }
 \arguments{
 \item{df_sf}{A sf data frame containing at least the variables
-\code{province}, \code{geometry}.}
+\code{province}, \code{geometry} and \code{district} if `history_lst`
+contains complexe event}
 
 \item{history_lst}{A list containing a list of event, each code with a slot
-\code{after}, a slot \code{before}, a slot{event} (split/merge/rename) and a
-slot \code{year}.}
-
-\item{sel}{an expression on the values of the categorical variable used for
-aggregation, by default \code{"province"}}
+\code{after}, a slot \code{before}, a slot{event} (split/merge/rename/
+complexe merge/complexe split) and a slot \code{year}.}
 
 \item{from}{Initial date of the time range selected for the province
 definition, of the class \code{Date}, \code{character} or \code{numeric}.}
@@ -24,6 +21,9 @@ definition, of the class \code{Date}, \code{character} or \code{numeric}.}
 \item{to}{Final date of the time range selected for the province
 definition, of the class \code{Date}, \code{character} or \code{numeric}, by
 default  \code{"2018-12-31"}}
+
+\item{sel}{an expression on the values of the categorical variable used for
+aggregation, by default \code{"province"}}
 }
 \value{
 A object of the same class as \code{df_sf} in which all the variables
