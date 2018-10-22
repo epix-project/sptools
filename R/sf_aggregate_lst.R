@@ -124,8 +124,6 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 #' @param history_lst A list containing a list of event, each code with a slot
 #' \code{after}, a slot \code{before}, a slot{event} (split/merge/rename/
 #' complexe merge/complexe split) and a slot \code{year}.
-#' @param sel an expression on the values of the categorical variable used for
-#' aggregation, by default \code{"province"}
 #' @param from Initial date of the time range selected for the province
 #' definition, of the class \code{Date}, \code{character} or \code{numeric}.
 #' @param to Final date of the time range selected for the province

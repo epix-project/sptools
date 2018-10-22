@@ -21,9 +21,6 @@ definition, of the class \code{Date}, \code{character} or \code{numeric}.}
 \item{to}{Final date of the time range selected for the province
 definition, of the class \code{Date}, \code{character} or \code{numeric}, by
 default  \code{"2018-12-31"}}
-
-\item{sel}{an expression on the values of the categorical variable used for
-aggregation, by default \code{"province"}}
 }
 \value{
 A object of the same class as \code{df_sf} in which all the variables
