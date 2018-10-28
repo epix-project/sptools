@@ -2,6 +2,7 @@
 
 export(apply_pts_by_poly)
 export(areas)
+export(as_list)
 export(crop_on_poly)
 export(crs)
 export(gadm)
