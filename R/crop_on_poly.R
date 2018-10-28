@@ -1,7 +1,7 @@
 #' Crops a raster file according to a polygon
 #'
-#' @param plgn spatial polygon sp
 #' @param rstr raster
+#' @param plgn spatial polygon sp
 #'
 #' @examples
 #' # library(sf)
@@ -20,7 +20,7 @@
 #'
 #' @export
 #'
-crop_on_poly <- function(plgn, rstr) {
+crop_on_poly <- function(rstr, plgn) {
 #  require(raster) # crop, rasterize, mask
   crpd_rstr <- crop(rstr, plgn)
   themask <- rasterize(plgn, crpd_rstr)
