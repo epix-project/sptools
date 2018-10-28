@@ -14,4 +14,7 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
 Suggests: gadmVN, imhen, magrittr
-Imports: maptools, rgeos, sp
+Imports: maptools,
+    rgeos,
+    sp,
+    raster
