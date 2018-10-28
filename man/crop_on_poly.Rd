@@ -4,12 +4,12 @@
 \alias{crop_on_poly}
 \title{Crops a raster file according to a polygon}
 \usage{
-crop_on_poly(rstr, plgn)
+crop_on_poly(plgn, rstr)
 }
 \arguments{
-\item{rstr}{raster}
-
 \item{plgn}{spatial polygon sp}
+
+\item{rstr}{raster}
 }
 \description{
 Crops a raster file according to a polygon
