@@ -17,11 +17,14 @@
 #' @importFrom raster crop
 #' @importFrom raster rasterize
 #' @importFrom raster mask
+#' @importFrom sp proj4string
+#' @importFrom sp CRS
+#' @importFrom sp spTransform
 #'
 #' @export
 #'
 crop_on_poly <- function(rstr, plgn) {
-#  require(raster) # crop, rasterize, mask
+  plgn <- spTransform(plgn, CRS(proj4string(rstr)))
   crpd_rstr <- crop(rstr, plgn)
   themask <- rasterize(plgn, crpd_rstr)
   mask(crpd_rstr, themask)
