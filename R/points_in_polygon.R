@@ -54,6 +54,7 @@
 #' sp::plot(stations, add = TRUE, col = "red")
 #' sp::plot(stations5, add = TRUE, col = "blue")
 points_in_polygon <- function(points, polygon) {
-  if (!identicalCRS(points, polygon)) polygon <- spTransform(polygon, crs(points))
+  if (!identicalCRS(points, polygon))
+    polygon <- spTransform(polygon, crs(points))
   points[complete.cases(over(points, polygon)), ]
 }

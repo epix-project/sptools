@@ -53,8 +53,8 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
     if (event$event == "complexe merge") {
       suppressWarnings(tmp <-  split(df, f = df[, col_name] %>% unlist %in%
                                        event$after %>% unlist))
-      # calculate the new geometry and update the new spatial definition (name and
-      # geometry) in the data frame selected
+      # calculate the new geometry and update the new spatial definition (name
+      # and geometry) in the data frame selected
       tmp$`TRUE` %<>%
         select(- !! col_name) %>%
         left_join(event$d.before %>% tidyr::unnest(), by = col_name2) %>%
@@ -69,7 +69,7 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
     }
 
     # For the split event
-    if (event$event == "split"| event$event == "complexe split") {
+    if (event$event == "split" | event$event == "complexe split") {
       # Split the data frame to select the province that we need to merge
       # together
       if (event$event == "split") {
@@ -173,5 +173,5 @@ sf_aggregate_lst <- function(df_sf, history_lst, from, to = "2018-12-31") {
 }
 
 ## quiets concerns of R CMD check for the values that appear in pipelines
-if(getRversion() >= "2.15.1")  utils::globalVariables(c(":=", "geometry",
+if (getRversion() >= "2.15.1")  utils::globalVariables(c(":=", "geometry",
                                                         "new_var", "."))
