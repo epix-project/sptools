@@ -18,7 +18,8 @@ Depends:
 Suggests: 
     gadmVN,
     imhen,
-    dictionary
+    dictionary,
+    srtmVN
 Imports: 
     maptools,
     rgeos, 
