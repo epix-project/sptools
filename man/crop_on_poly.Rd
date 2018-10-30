@@ -15,14 +15,15 @@ crop_on_poly(rstr, plgn)
 Crops a raster file according to a polygon
 }
 \examples{
-# library(sf)
-# library(sptools)
-# library(dplyr)
-# provinces <- provinces <- "vietnam" \%>\%
-#   sptools::gadm("sf", 1) \%>\%
-#   transmute(province = VARNAME_1) \%>\%
-#   as("Spatial")
-# ppp2010 <- worldpopVN::getpop(2010)
-# hanoi <- crop_on_poly(subset(provinces, province == "Ha Noi"), ppp2010)
+
+library(sf)
+library(dplyr)
+
+provinces <- provinces <- "vietnam" \%>\%
+  sptools::gadm("sf", 1) \%>\%
+  transmute(province = VARNAME_1) \%>\%
+  as("Spatial")
+srtm <- srtmVN::getsrtm()
+hanoi <- crop_on_poly(srtm, subset(provinces, province == "Ha Noi"))
 
 }

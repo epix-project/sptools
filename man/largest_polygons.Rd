@@ -20,12 +20,16 @@ the largest \code{Polygon} is the input \code{sppoly}.
 Filter the Largest Polygon of each polygon slot of a SpatialPolygon* object
 }
 \examples{
+library(sf)
+# working on the provinces polygons of Vietnam:
 vn_prov <- gadmVN::gadm()
+vn_prov <- sf::as_Spatial(vn_prov)
 vn_prov2 <- largest_polygons(vn_prov)
 sp::plot(vn_prov)
 sp::plot(vn_prov2)
 # same with the country level:
 vn <- gadmVN::gadm(level = "country")
+vn <- sf::as_Spatial(vn)
 vn2 <- largest_polygons(vn)
 rgeos::gEnvelope(vn)
 # extracting the largest polygon only for Da Nang:

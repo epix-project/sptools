@@ -6,6 +6,9 @@
 \usage{
 crs(spobject)
 }
+\arguments{
+\item{spobject}{an object of class Spatial}
+}
 \value{
 A CRS object as defined in the \code{sp} package.
 }
@@ -13,7 +16,10 @@ A CRS object as defined in the \code{sp} package.
 Retrieve the CRS of a Spatial* Object
 }
 \examples{
+library(sf)
+# working on the provinces polygons of Vietnam:
 vn_prov <- gadmVN::gadm()
+vn_prov <- sf::as_Spatial(vn_prov)
 crs(vn_prov)
 vn_prov2 <- sp::spTransform(vn_prov, projVN)
 crs(vn_prov2)

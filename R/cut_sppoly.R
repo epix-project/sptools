@@ -38,22 +38,19 @@ cut_poly <- function(poly, pt1, pt2) {
              poly_coord_df[1:points[1], ]))
 }
 
-
-#x <- vn_prov@polygons[[1]]@Polygons[[1]]
-
 #' @importFrom sp Line Lines SpatialLines
+#' @importFrom methods slot
 cut_sppoly <- function(sppoly, pt1, pt2) {
-#  vn_prov@polygons[[1]]@Polygons
-  f1 <- function(x, pt1, pt2) lapply(x, cut_poly, pt1, pt2)
 
-#  vn_prov@polygons
+  f1 <- function(x, pt1, pt2) lapply(x, cut_poly, pt1, pt2)
   f2 <- function(x, pt1, pt2) lapply(lapply(x, slot, "Polygons"), f1, pt1, pt2)
 
   third_level <- function(ind, x) lapply(x, lapply, `[[`, ind)
 
   out <- lapply(1:2, third_level, f2(sppoly@polygons, pt1, pt2))
   out <- lapply(out, lapply, lapply, Line)
-  out <- lapply(out, function(x) Map(Lines, x, sapply(sppoly@polygons, slot, "ID")))
+  out <- lapply(out, function(x) Map(Lines, x,
+                                     sapply(sppoly@polygons, slot, "ID")))
   lapply(out, SpatialLines, crs(sppoly))
 }
 

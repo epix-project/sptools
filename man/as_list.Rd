@@ -13,16 +13,16 @@ as_list(plgn)
 Convert a Spatial polygon into a list of Spatial polygons
 }
 \examples{
-# library(sf)
-# library(sptools)
-# library(dplyr)
-# provinces <- provinces <- "vietnam" \%>\%
-#   sptools::gadm("sf", 1) \%>\%
-#   transmute(province = VARNAME_1) \%>\%
-#   as("Spatial")
-# class(provinces)
-# list_provinces <- as_list(provinces)
-# class(list_provinces)
-# table(sapply(list_provinces, class))
+
+library(sf)
+library(dplyr)
+provinces <- provinces <- "vietnam" \%>\%
+  sptools::gadm("sf", 1) \%>\%
+  transmute(province = VARNAME_1) \%>\%
+  as("Spatial")
+class(provinces)
+list_provinces <- as_list(provinces)
+class(list_provinces)
+table(sapply(list_provinces, class))
 
 }

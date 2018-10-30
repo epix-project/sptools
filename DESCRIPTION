@@ -6,15 +6,29 @@ Authors@R: person("Marc", "Choisy",
                   email = "marc.choisy@ird.fr", 
                   role = c("aut", "cre", "cph"),
                   comment = c(ORCID = "https://orcid.org/0000-0002-5187-6390"))
-Description: A collection of functions to extend the packages sp and rgeos
+Description: A collection of functions to extend the packages sp and rgeos.
 License: MIT + file LICENSE
 URL: https://github.com/choisy/sptools
 BugReports: https://github.com/choisy/sptools/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
-Suggests: gadmVN, imhen, magrittr
-Imports: maptools,
-    rgeos,
-    sp,
+Depends:
+    R (>= 2.10)
+Suggests: 
+    gadmVN,
+    imhen,
+    dictionary,
+    srtmVN
+Imports: 
+    maptools,
+    rgeos, 
+    sp, 
+    magrittr, 
+    countrycode,
+    methods,
+    sf,
+    dplyr,
+    purrr,
+    tidyr,
     raster

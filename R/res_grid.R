@@ -10,6 +10,7 @@
 #'
 #' @importFrom magrittr %>%
 #' @importFrom sp coordinates
+#' @importFrom utils head
 #'
 #' @export
 #'
