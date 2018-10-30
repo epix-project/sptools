@@ -16,7 +16,9 @@ gadm <- function(country, format, level) {
   country <- countrycode(country, "country.name", "iso3c")
   file <- paste0("gadm36_", country, "_", level, "_", format, ".rds")
   if (!file.exists(file))
-    download.file(paste0("https://biogeo.ucdavis.edu/data/gadm3.6/R", format, "/", file), file)
+    download.file(paste0("https://biogeo.ucdavis.edu/data/gadm3.6/R", format,
+                         "/", file), file)
   data <- readRDS(file)
+  file.remove(file)
   data
 }

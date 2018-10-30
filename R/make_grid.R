@@ -29,7 +29,7 @@
 #' sp::plot(grid2, add = TRUE, col = "blue")
 #'
 make_grid <- function(sppoly, n, ...) {
-  if(!missing(n)) {
+  if (!missing(n)) {
     n <- n * do.call(`*`, as.list(apply(sppoly@bbox, 1, diff))) /
       suppressWarnings(gArea(sppoly))
   }

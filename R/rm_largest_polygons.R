@@ -7,7 +7,8 @@
     x@Polygons <- x@Polygons[-y] # remove largest
     x@plotOrder <- x@plotOrder[-length(x@plotOrder)]
     x@area <- z
-    checkPolygonsHoles(x)},
+    checkPolygonsHoles(x)
+    },
     sppoly@polygons[sel],
     sapply(surfaces, which.max),
     sapply(surfaces, function(x) sum(x) - max(x)))
@@ -58,13 +59,15 @@ rm_largest_polygons <- function(sppoly, subset) {
     set <- condition_c[3]
     if (condition_c[1] == "==") {
       sppoly@polygons[[which(sppoly@data[[variable]] == set)]] <-
-        .rm_largest_polygons(sppoly[sppoly@data[[variable]] == set, ])@polygons[[1]]
+        .rm_largest_polygons(
+          sppoly[sppoly@data[[variable]] == set, ])@polygons[[1]]
     } else {
       set <- gsub("^c\\(\\\"", "", set)
       set <- gsub("\\\"\\)", "", set)
       set <- strsplit(set, "\\\", \\\"")[[1]] # because strsplit returns a list
-      for(i in set) sppoly@polygons[[which(sppoly@data[[variable]] == i)]] <-
-        .rm_largest_polygons(sppoly[sppoly@data[[variable]] == i, ])@polygons[[1]]
+      for (i in set) sppoly@polygons[[which(sppoly@data[[variable]] == i)]] <-
+        .rm_largest_polygons(
+          sppoly[sppoly@data[[variable]] == i, ])@polygons[[1]]
     }
   }
   sppoly@bbox <- gEnvelope(sppoly)@bbox

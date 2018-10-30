@@ -6,7 +6,8 @@
                            x@Polygons <- x@Polygons[y]
                            x@plotOrder <- 1L
                            x@area <- z
-                           checkPolygonsHoles(x)},
+                           checkPolygonsHoles(x)
+                           },
                          sppoly@polygons,
                          sapply(surfaces, which.max),
                          sapply(surfaces, max))
@@ -60,12 +61,12 @@ largest_polygons <- function(sppoly, subset) {
     set <- condition_c[3]
     if (condition_c[1] == "==") {
       sppoly@polygons[[which(sppoly@data[[variable]] == set)]] <-
-        .largest_polygons(sppoly[sppoly@data[[variable]] == set, ])@polygons[[1]]
+       .largest_polygons(sppoly[sppoly@data[[variable]] == set, ])@polygons[[1]]
     } else {
       set <- gsub("^c\\(\\\"", "", set)
       set <- gsub("\\\"\\)", "", set)
       set <- strsplit(set, "\\\", \\\"")[[1]] # because strsplit returns a list
-      for(i in set) sppoly@polygons[[which(sppoly@data[[variable]] == i)]] <-
+      for (i in set) sppoly@polygons[[which(sppoly@data[[variable]] == i)]] <-
         .largest_polygons(sppoly[sppoly@data[[variable]] == i, ])@polygons[[1]]
     }
   }
