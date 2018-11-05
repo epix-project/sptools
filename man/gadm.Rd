@@ -4,19 +4,24 @@
 \alias{gadm}
 \title{Get GADM data}
 \usage{
-gadm(country, format, level)
+gadm(country, format, level, file_rm = TRUE, path = NULL)
 }
 \arguments{
 \item{country}{character string, name of the country to download}
 
 \item{format}{character string, format to downlaod, either sp or sf}
 
-\item{level}{integer between 0 and 3 or 4, level of the administrative borders,
-0 being country borders.}
+\item{level}{integer between 0 and 3 or 4, level of the administrative
+borders, 0 being country borders.}
+
+\item{file_rm}{boolean, if TRUE, remove the dowmloaded file.
+By default, TRUE.}
+
+\item{path}{character string, name where the dowloaded file is saved}
 }
 \description{
 Download sp or sf file format from GADM
 }
 \author{
-Marc Choisy
+Marc Choisy, Lucie Contamin
 }
