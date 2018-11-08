@@ -17,8 +17,12 @@ This function removes the features of a \code{SpatialPointsDataFrame} for
 which there is NA is the attributes.
 }
 \examples{
-# stations <- as(imhen::stations, "Spatial")
-# stations@data$elevation[seq(2, 12, 2)] <- NA
-# head(stations@data)
-# head(na_exclude(stations)@data)
+library(imhen)
+
+stations <-  imhen::stations
+stations <- sf::as_Spatial(stations)
+stations@data$elevation[seq(2, 12, 2)] <- NA
+
+head(stations@data)
+head(na_exclude(stations)@data)
 }
