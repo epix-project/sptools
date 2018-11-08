@@ -22,5 +22,5 @@
 split_on_poly <- function(rstr, plgns) {
   plgns %>%
     as_list() %>%
-    lapply(crop_on_poly, rstr)
+    lapply(., function(x) crop_on_poly(rstr, x))
 }
