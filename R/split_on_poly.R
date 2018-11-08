@@ -13,12 +13,16 @@
 #' @export
 #'
 #' @examples
-#' # provinces <- sptools::gadm("vietnam", "sp", 1)
-#' # ppp2010 <- worldpopVN::getpop(2010)
-#' # class(ppp2010)
-#' # ppp2010_split <- split_on_poly(ppp2010, provinces[1:3, ])
-#' # class(ppp2010_split)
-#' # table(sapply(ppp2010_split, class))
+#'
+#' library(worldpopVN)
+#'
+#' provinces <- sptools::gadm("vietnam", "sp", 1)
+#' ppp2010 <- worldpopVN::getpop(2010)
+#' class(ppp2010)
+#'
+#' ppp2010_split <- split_on_poly(ppp2010, provinces[1:3, ])
+#' class(ppp2010_split)
+#' table(sapply(ppp2010_split, class))
 split_on_poly <- function(rstr, plgns) {
   plgns %>%
     as_list() %>%
