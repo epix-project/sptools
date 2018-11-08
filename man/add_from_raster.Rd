@@ -21,10 +21,14 @@ Based on the \code{\link[raster]{extract}} function.
 }
 \examples{
 library(sp)
-sptools::gadm("vietnam", "sp", 0) \%>\%
+library(magrittr) # for " \%>\% "
+
+value <- sptools::gadm("vietnam", "sp", 0) \%>\%
   spsample(100, "random") \%>\%
   SpatialPointsDataFrame(data.frame(variable = 1:100)) \%>\%
-  add_from_raster(srtmVN::getsrtm(), "elevation") \%>\%
+  add_from_raster(srtmVN::getsrtm(), "elevation")
+
+value \%>\%
   slot("data") \%>\%
   head()
 }

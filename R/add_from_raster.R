@@ -16,13 +16,16 @@
 #'
 #' @examples
 #' library(sp)
-#' sptools::gadm("vietnam", "sp", 0) %>%
+#' library(magrittr) # for " %>% "
+#'
+#' value <- sptools::gadm("vietnam", "sp", 0) %>%
 #'   spsample(100, "random") %>%
 #'   SpatialPointsDataFrame(data.frame(variable = 1:100)) %>%
-#'   add_from_raster(srtmVN::getsrtm(), "elevation") %>%
+#'   add_from_raster(srtmVN::getsrtm(), "elevation")
+#'
+#' value %>%
 #'   slot("data") %>%
 #'   head()
-
 add_from_raster <- function(sptsdf, rstr, varname = "new_data") {
 # Note that we chose to project the SpatialPointsDataFrame instead of the
 # RasterLayer because it is much quicker this way.
