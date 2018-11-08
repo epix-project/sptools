@@ -7,6 +7,7 @@
 #'
 #' @return A \code{SpatialPointsDataFrame} object.
 #'
+#' @importClassesFrom sp SpatialPointsDataFrame
 #' @export
 #'
 #' @examples
@@ -19,7 +20,6 @@
 #' head(stations@data)
 #' head(na_exclude(stations)@data)
 na_exclude <- function(spdf) {
-  require(sp) # for the SpatialPointsDataFrame class
   sel <- which(rowSums(is.na(spdf@data)) > 0)
   if (length(sel) > 0) return(spdf[-sel, ])
   spdf
