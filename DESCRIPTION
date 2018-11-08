@@ -19,7 +19,8 @@ Suggests:
     gadmVN,
     imhen,
     dictionary,
-    srtmVN
+    srtmVN,
+    worldpopVN
 Imports: 
     maptools,
     rgeos, 
