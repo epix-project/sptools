@@ -152,7 +152,8 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 #' @export
 sf_aggregate_lst <- function(df_sf, history_lst, from, to = "2018-12-31") {
 
-  if (history_lst %>% purrr::map("event") %>% grepl("complexe", .) %>% any) {
+  if (select_events(history_lst, from, to) %>% purrr::map("event") %>%
+      grepl("complexe", .) %>% any) {
    sel <- c("province", "district")
    col_name <- "province"
    col_name2 <- "district"
