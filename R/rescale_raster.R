@@ -12,13 +12,20 @@
 #' @export
 #'
 #' @examples
-#' # provinces <- sptools::gadm("vietnam", "sp", 1)
-#' # ppp2010 <- worldpopVN::getpop(2010)
-#' # hanoi <- sptools::crop_on_poly(subset(provinces, VARNAME_1 == "Ha Noi"), ppp2010)
-#' # # before rescaling:
-#' # sum(values(hanoi), na.rm = TRUE)
-#' # # after rescaling:
-#' # sum(values(rescale(hanoi)), na.rm = TRUE)
+#'
+#' library(worldpopVN)
+#' provinces <- sptools::gadm("vietnam", "sp", 1)
+#' ppp2010 <- worldpopVN::getpop(2010)
+#'
+#' hanoi <- sptools::crop_on_poly(ppp2010, subset(provinces,
+#'   VARNAME_1 == "Ha Noi"))
+#'
+#' # before rescaling:
+#' sum(values(hanoi), na.rm = TRUE)
+#'
+#' # after rescaling:
+#' sum(values(rescale_raster(hanoi)), na.rm = TRUE)
+#'
 rescale_raster <- function(rstr) {
   val <- values(rstr)
   values(rstr) <- val / sum(val, na.rm = TRUE)
