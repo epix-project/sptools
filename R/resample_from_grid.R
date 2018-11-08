@@ -20,30 +20,34 @@
 #' @export
 #'
 #' @examples
-#' # library(sp)
-#' # library(raster)
-#' # library(sptools)
-#' # # The polygon of a country:
-#' # country <- gadm("vietnam", "sp", 0)
+#' \dontrun{
+#' library(sp)
+#' library(raster)
 #'
-#' # # A grid of 100 points over the country:
-#' # proj <- proj4string(country)
-#' # grid100 <- country %>%
-#' #   makegrid(100) %>%
-#' #   SpatialPoints(CRS(proj))
+#' # The polygon of a country:
+#' country <- gadm("vietnam", "sp", 0)
 #'
-#' # # Let's resample:
-#' # ppp2010rspld <- resample_from_grid(ppp2010, grid100)
+#' # A grid of 100 points over the country:
+#' proj <- proj4string(country)
+#' grid100 <- country %>%
+#'   makegrid(100) %>%
+#'   SpatialPoints(CRS(proj))
 #'
-#' # # Let's compare:
-#' # ppp2010
-#' # ppp2010rspld
-#' # plot(ppp2010rspld)
-#' # plot(grid100, add = TRUE)
-#' # plot(country, add = TRUE)
+#' # Let's resample:
+#' ppp2010rspld <- resample_from_grid(ppp2010, grid100)
+#'
+#' # Let's compare:
+#' ppp2010
+#' ppp2010rspld
+#'
+#' plot(ppp2010rspld)
+#' plot(grid100, add = TRUE)
+#' plot(country, add = TRUE)
+#' }
 resample_from_grid <- function(rstr, grd) {
   crs <- proj4string(rstr)
-  layer_or_brick <- function(x) { # this function manages RasterLayer or Bricks (or Stack)
+  # this function manages RasterLayer or Bricks (or Stack)
+  layer_or_brick <- function(x) {
     if (class(x) == "RasterLayer") return(x)
     raster(x, 1)
   }
