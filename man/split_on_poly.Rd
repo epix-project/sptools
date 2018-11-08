@@ -15,13 +15,13 @@ split_on_poly(rstr, plgns)
 A list of \code{RasterLayer} objects.
 }
 \description{
-This function combines the above functions \code{as_list} and
-\code{crop_on_poly} to split a \code{RasterLayer} object on the features of a
-\code{SpatialPpolygons*} object. Of course, the \code{RasterLayer} and the
-\code{SpatialPpolygons*} objects need to superpose.
+This function combines the above functions \code{\link[sptools]{as_list}} and
+\code{\link[sptools]{crop_on_poly}}. to split a \code{RasterLayer} object on
+the features of a \code{SpatialPpolygons*} object. Of course, the
+\code{RasterLayer} and the \code{SpatialPpolygons*} objects need to
+superpose.
 }
 \examples{
-
 library(worldpopVN)
 
 provinces <- sptools::gadm("vietnam", "sp", 1)

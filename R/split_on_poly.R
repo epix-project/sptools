@@ -1,9 +1,10 @@
 #' Splits a raster on a spatial polygon
 #'
-#' This function combines the above functions \code{as_list} and
-#' \code{crop_on_poly} to split a \code{RasterLayer} object on the features of a
-#' \code{SpatialPpolygons*} object. Of course, the \code{RasterLayer} and the
-#' \code{SpatialPpolygons*} objects need to superpose.
+#' This function combines the above functions \code{\link[sptools]{as_list}} and
+#' \code{\link[sptools]{crop_on_poly}}. to split a \code{RasterLayer} object on
+#' the features of a \code{SpatialPpolygons*} object. Of course, the
+#' \code{RasterLayer} and the \code{SpatialPpolygons*} objects need to
+#' superpose.
 #'
 #' @param rstr A RasterLayer
 #' @param plgns A SpatialPolygon* object
@@ -13,7 +14,6 @@
 #' @export
 #'
 #' @examples
-#'
 #' library(worldpopVN)
 #'
 #' provinces <- sptools::gadm("vietnam", "sp", 1)
