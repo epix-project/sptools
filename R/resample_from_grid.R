@@ -23,9 +23,13 @@
 #' \dontrun{
 #' library(sp)
 #' library(raster)
+#' library(wordlpopVN)
+#'
 #'
 #' # The polygon of a country:
 #' country <- gadm("vietnam", "sp", 0)
+#' # The raster of population
+#' ppp2010 <- worldpopVN::getpop(2010)
 #'
 #' # A grid of 100 points over the country:
 #' proj <- proj4string(country)
