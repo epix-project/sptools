@@ -22,10 +22,8 @@ SpatialPolygon* object.
 \examples{
 library(magrittr)
 library(sf)
-vn <- gadmVN::gadm(level = "country")
-vn <- sf::as_Spatial(vn)
-#data(stations, package = "imhen") ##
-stations <- as(imhen::stations, "Spatial") ##
+vn <- sf::as_Spatial(gadmVN::gadm(level = "country"))
+stations <- as(imhen::stations, "Spatial")
 length(stations)
 stations2 <- points_in_polygon(stations, vn)
 length(stations2)
