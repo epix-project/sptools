@@ -56,5 +56,6 @@
 points_in_polygon <- function(points, polygon) {
   if (!identicalCRS(points, polygon))
     polygon <- spTransform(polygon, crs(points))
+  polygon@data <- polygon@data[, !apply(polygon@data, 2, function(x) all(is.na(x)))]
   points[complete.cases(over(points, polygon)), ]
 }
