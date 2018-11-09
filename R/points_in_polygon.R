@@ -9,7 +9,7 @@
 #' @return A \code{SpatialPoints*} object of which all the points are inside the
 #' inputed \code{SpatialPolygon*} object.
 #'
-#' @importFrom sp identicalCRS over spTransform
+#' @importFrom sp identicalCRS over spTransform SpatialPolygons
 #' @importFrom stats complete.cases
 #'
 #' @export
