@@ -49,7 +49,7 @@ add_from_raster <- function(sptsdf, rstr, varname = "new_data") {
     sptsdf <- SpatialPointsDataFrame(sptsdf@coords,
                                      data_frame(!!varname :=
                                                 raster::extract(rstr, sptsdf)),
-                                     proj4string = rstr@crs)
+                                     proj4string = sptsdf@proj4string)
   } else {
     sptsdf[[varname]] <- raster::extract(rstr, sptsdf)
   }
