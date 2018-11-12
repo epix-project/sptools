@@ -9,8 +9,9 @@
 #' @return A \code{SpatialPointsDataFrame} object.
 #'
 #' @importFrom magrittr %<>%
-#' @importFrom sp spTransform proj4string
+#' @importFrom sp spTransform proj4string SpatialPointsDataFrame
 #' @importFrom raster extract
+#' @importFrom dplyr data_frame
 #'
 #' @export
 #'
@@ -18,9 +19,22 @@
 #' library(sp)
 #' library(magrittr) # for " %>% "
 #'
-#' value <- sptools::gadm("vietnam", "sp", 0) %>%
+#' vn <- sptools::gadm("vietnam", "sp", 0)
+#'
+#' # With a SpatialPointsDataFrame
+#' value <- vn %>%
 #'   spsample(100, "random") %>%
 #'   SpatialPointsDataFrame(data.frame(variable = 1:100)) %>%
+#'   add_from_raster(srtmVN::getsrtm(), "elevation")
+#'
+#' value %>%
+#'   slot("data") %>%
+#'   head()
+#'
+#' # With a SpatialPoints
+#' value <- vn %>%
+#'   spsample(100, "random") %>%
+#'   SpatialPoints(proj4string = vn@proj4string, bbox = vn@bbox) %>%
 #'   add_from_raster(srtmVN::getsrtm(), "elevation")
 #'
 #' value %>%
@@ -31,7 +45,14 @@ add_from_raster <- function(sptsdf, rstr, varname = "new_data") {
 # RasterLayer because it is much quicker this way.
   proj0 <- proj4string(sptsdf)
   sptsdf %<>% spTransform(proj4string(rstr))
-  sptsdf[[varname]] <- raster::extract(rstr, sptsdf)
+  if (class(sptsdf) == "SpatialPoints") {
+    sptsdf <- SpatialPointsDataFrame(sptsdf@coords,
+                                     data_frame(!!varname :=
+                                                raster::extract(rstr, sptsdf)),
+                                     proj4string = sptsdf@proj4string)
+  } else {
+    sptsdf[[varname]] <- raster::extract(rstr, sptsdf)
+  }
   sptsdf %<>% spTransform(proj0)
   sptsdf
 }
