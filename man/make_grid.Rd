@@ -14,7 +14,7 @@ make_grid(sppoly, n, ...)
 \item{...}{optional arguments passed to \code{sp::makegrid}}
 }
 \value{
-A \code{SpatialPoins$} object. The length of the object is
+A \code{SpatialPoints$} object. The length of the object is
 approximately equal to \code{n}.
 }
 \description{

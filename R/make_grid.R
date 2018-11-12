@@ -7,12 +7,13 @@
 #' @param n approximate sample size.
 #' @param ... optional arguments passed to \code{sp::makegrid}
 #'
-#' @return A \code{SpatialPoins$} object. The length of the object is
+#' @return A \code{SpatialPoints$} object. The length of the object is
 #' approximately equal to \code{n}.
 #'
 #' @importFrom sp makegrid SpatialPointsDataFrame
 #' @importFrom rgeos gArea
 #' @importFrom stats setNames
+#' @importFrom magrittr %>%
 #'
 #' @export
 #'
@@ -33,7 +34,7 @@ make_grid <- function(sppoly, n, ...) {
     n <- n * do.call(`*`, as.list(apply(sppoly@bbox, 1, diff))) /
       suppressWarnings(gArea(sppoly))
   }
-  tmp <- setNames(makegrid(sppoly, n, ...), c("longitude", "latitude"))
-  tmp <- SpatialPointsDataFrame(tmp, tmp, proj4string = crs(sppoly))
-  points_in_polygon(tmp, sppoly)
+  makegrid(sppoly, n, ...) %>%
+    SpatialPoints(crs(sppoly)) %>%
+    points_in_polygon(sppoly)
 }
