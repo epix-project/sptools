@@ -15,3 +15,11 @@ A SpatialPoints object.
 \description{
 Transform SpatialPointsDataFrame into SpatialPoints
 }
+\examples{
+library(sf)
+# devtools::install_github("choisy/imhen")
+stations <- as(imhen::stations, "Spatial")
+stations
+remove_data_spatialpoints(stations)
+
+}

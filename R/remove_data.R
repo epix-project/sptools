@@ -8,6 +8,13 @@
 #'
 #' @export
 #'
+#' @examples
+#' library(sf)
+#' # devtools::install_github("choisy/imhen")
+#' stations <- as(imhen::stations, "Spatial")
+#' stations
+#' remove_data_spatialpoints(stations)
+#'
 remove_data_spatialpoints <- function(spdf) {
   SpatialPoints(spdf, CRS(proj4string(spdf)))
 }
