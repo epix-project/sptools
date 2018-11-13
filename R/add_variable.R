@@ -58,5 +58,5 @@ add_variable_spdf <- function(spdf, df) {
 #' vn_data2
 #'
 add_variable_sp <- function(sp, df) {
-  SpatialPolygonsDataFrame(vn_nodata, data.frame(df), FALSE)
+  SpatialPolygonsDataFrame(sp, data.frame(df), FALSE)
 }
