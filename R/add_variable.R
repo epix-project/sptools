@@ -1,7 +1,7 @@
 #' Adds variable(s) to a Spatial*DataFrame
 #'
 #' @param sp A Spatial*DataFrame object
-#' @param df A vector of a data frame
+#' @param df A vector or a data frame
 #'
 #' @return An object of the same class than \code{sp}.
 #'
@@ -26,7 +26,31 @@ add_variable_spdf <- function(spdf, df) {
   spdf
 }
 
+# ------------------------------------------------------------------------------
 
+#' Adds variable(s) to a SpatialPolygons
+#'
+#' @param sp A SpatialPolygons object.
+#' @param df A vector or a data frame.
+#'
+#' @return A SpatialPolygonsDataFrame
+#'
+#' @importFrom sp SpatialPolygonsDataFrame
+#'
+#' @export
+#'
+#' @examples
+#' vn <- gadm("vietnam", "sp", 1)
+#' vn_nodata <- remove_data_spatialpolygons(vn)
+#' vn_nodata
+#' a <- runif(63)
+#' vn_data <- add_variable_sp(vn_nodata, a)
+#' vn_data
+#'
+#' # An example with a data frame:
+#' vn_data2 <- add_variable_sp(vn_nodata, data.frame(b = rnorm(63), c = rexp(63)))
+#' vn_data2
+#'
 add_variable_sp <- function(sp, df) {
-
+  SpatialPolygonsDataFrame(vn_nodata, data.frame(df), FALSE)
 }
