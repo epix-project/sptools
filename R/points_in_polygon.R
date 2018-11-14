@@ -63,8 +63,9 @@
 #' sp::plot(stations, add = TRUE, col = "red")
 #' sp::plot(stations5, add = TRUE, col = "blue")
 points_in_polygon <- function(points, polygon) {
-  if (class(polygon) =="SpatialPolygonsDataFrame")
-    polygon <- SpatialPolygons(polygon@polygons, proj4string = polygon@proj4string)
+  if (class(polygon) == "SpatialPolygonsDataFrame")
+    polygon <- SpatialPolygons(polygon@polygons,
+                               proj4string = polygon@proj4string)
   if (!identicalCRS(points, polygon))
     polygon <- spTransform(polygon, crs(points))
   points[complete.cases(over(points, polygon)), ]

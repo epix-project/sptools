@@ -60,3 +60,28 @@ add_variable_spdf <- function(spdf, df) {
 add_variable_sp <- function(sp, df) {
   SpatialPolygonsDataFrame(sp, data.frame(df), FALSE)
 }
+
+
+# ------------------------------------------------------------------------------
+
+#' Adds variable(s) to a SpatialPoints
+#'
+#' @param sp A SpatialPoints object.
+#' @param df A vector or a data frame.
+#'
+#' @return A SpatialPointsDataFrame
+#'
+#' @importFrom sp SpatialPointsDataFrame
+#'
+#' @examples
+#' library(magrittr)
+#' stations <- imhen::stations %>%
+#'   sf::as_Spatial() %>%
+#'   remove_data_spatialpoints()
+#' stations
+#' add_variable_spts(stations, 1:length(stations))
+#' @export
+add_variable_spts <- function(sp, df) {
+  SpatialPointsDataFrame(coordinates(sp), data.frame(df),
+                         proj4string = CRS(proj4string(sp)))
+}

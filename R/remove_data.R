@@ -39,4 +39,3 @@ remove_data_spatialpoints <- function(spdf) {
 remove_data_spatialpolygons <- function(spdf) {
   SpatialPolygons(spdf@polygons, spdf@plotOrder, CRS(proj4string(spdf)))
 }
-
