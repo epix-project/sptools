@@ -3,6 +3,7 @@
 export(add_from_raster)
 export(add_variable_sp)
 export(add_variable_spdf)
+export(add_variable_spts)
 export(apply_pts_by_poly)
 export(areas)
 export(as_list)
