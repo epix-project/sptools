@@ -55,12 +55,6 @@ resample_from_grid <- function(rstr, grd) {
     if (class(x) == "RasterLayer") return(x)
     raster(x, 1)
   }
-# this function moves the coordinates to the first two variables of the df:
-  move_xy <- function(df) {
-    nc <- ncol(df)
-    sel <- c(nc - 1, nc)
-    cbind(df[, sel], df[, -sel])
-  }
 # the pipeline:
   grd %>%
     spTransform(crs) %>%
