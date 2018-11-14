@@ -73,14 +73,15 @@ add_variable_sp <- function(sp, df) {
 #'
 #' @importFrom sp SpatialPointsDataFrame
 #'
-#' @export
+#' @examples
 #' library(magrittr)
 #' stations <- imhen::stations %>%
 #'   sf::as(, "Spatial") %>%
 #'   remove_data_spatialpoints()
 #' stations
 #' add_variable_spts(stations, 1:length(stations))
-#' @examples
+#' @export
 add_variable_spts <- function(sp, df) {
-  SpatialPointsDataFrame(coordinates(sp), data.frame(df), proj4string = CRS(proj4string(sp)))
+  SpatialPointsDataFrame(coordinates(sp), data.frame(df),
+                         proj4string = CRS(proj4string(sp)))
 }
