@@ -73,5 +73,3 @@ largest_polygons <- function(sppoly, subset) {
   sppoly@bbox <- gEnvelope(sppoly)@bbox
   sppoly
 }
-
-

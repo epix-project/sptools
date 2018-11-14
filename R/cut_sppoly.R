@@ -53,6 +53,3 @@ cut_sppoly <- function(sppoly, pt1, pt2) {
                                      sapply(sppoly@polygons, slot, "ID")))
   lapply(out, SpatialLines, crs(sppoly))
 }
-
-
-

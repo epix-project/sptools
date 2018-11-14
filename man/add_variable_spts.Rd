@@ -20,7 +20,7 @@ Adds variable(s) to a SpatialPoints
 \examples{
 library(magrittr)
 stations <- imhen::stations \%>\%
-  sf::as(, "Spatial") \%>\%
+  sf::as_Spatial() \%>\%
   remove_data_spatialpoints()
 stations
 add_variable_spts(stations, 1:length(stations))
