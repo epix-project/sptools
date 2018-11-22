@@ -62,7 +62,8 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
         sf::st_as_sf() %>%
         group_by(.dots = col_name) %>%
         st_union(by_feature = TRUE) %>%
-        st_cast("MULTIPOLYGON")
+        st_cast("MULTIPOLYGON") %>%
+        ungroup
       # Update the new information in the general data frame
       df <- rbind(tmp$`TRUE`, tmp$`FALSE`) %>%
         arrange(!! sym(eval(col_name)))
@@ -135,7 +136,7 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 #' range) are changed.
 #'
 #' @importFrom dplyr select arrange left_join mutate rename distinct contains
-#' sym group_by summarise
+#' sym group_by summarise ungroup
 #' @importFrom sf st_union st_cast st_join
 #' @importFrom magrittr %>% %<>%
 #' @importFrom stats na.omit
