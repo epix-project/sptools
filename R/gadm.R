@@ -25,7 +25,7 @@ gadm <- function(country, format, level, file_rm = TRUE, path = NULL) {
   }
   if (!file.exists(pfile))
     download.file(paste0("https://biogeo.ucdavis.edu/data/gadm3.6/R", format,
-                         "/", file), pfile)
+                         "/", file), pfile, mode = "wb")
   data <- readRDS(pfile)
   if (isTRUE(file_rm)) file.remove(pfile)
   data
