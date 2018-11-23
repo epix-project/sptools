@@ -24,7 +24,8 @@ Suggests:
     imhen,
     dictionary,
     srtmVN,
-    worldpopVN
+    worldpopVN,
+    testthat
 Imports: 
     maptools,
     rgeos, 
