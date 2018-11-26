@@ -1,6 +1,6 @@
 #' Transforms an sf points into a dataframe
 #'
-#' @param sfpts An \code(sf) points object.
+#' @param sfpts An \code{sf} points object.
 #'
 #' @return A data frame that contains the same fields as \code{sfpts} plus the
 #' longitude and latitude in 2 separate columns.

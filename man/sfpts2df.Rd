@@ -7,7 +7,7 @@
 sfpts2df(sfpts)
 }
 \arguments{
-\item{sfpts}{An \code(sf) points object.}
+\item{sfpts}{An \code{sf} points object.}
 }
 \value{
 A data frame that contains the same fields as \code{sfpts} plus the
