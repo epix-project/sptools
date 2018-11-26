@@ -15,5 +15,6 @@
 sfpts2df <- function(sfpts) {
   data <- sfpts
   st_geometry(data) <- NULL
-  data.frame(data, setNames(data.frame(st_coordinates(sfpts)), c("longitude", "latitude")))
+  data.frame(data, setNames(data.frame(st_coordinates(sfpts)),
+                            c("longitude", "latitude")))
 }
