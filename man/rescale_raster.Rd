@@ -19,7 +19,8 @@ sum to 1. These values can then be used as weights.
 \examples{
 
 library(worldpopVN)
-provinces <- sptools::gadm("vietnam", "sp", 1)
+provinces <- sptools::gadm("vietnam", "sp", 1, path = getwd(),
+   intlib = FALSE)
 ppp2010 <- worldpopVN::getpop(2010)
 
 hanoi <- sptools::crop_on_poly(ppp2010, subset(provinces,
