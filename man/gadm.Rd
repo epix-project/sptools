@@ -4,7 +4,7 @@
 \alias{gadm}
 \title{Get GADM data}
 \usage{
-gadm(country, format, level, file_rm = TRUE, path = NULL)
+gadm(country, format, level, path = NULL, intlib = NULL)
 }
 \arguments{
 \item{country}{character string, name of the country to download}
@@ -14,13 +14,27 @@ gadm(country, format, level, file_rm = TRUE, path = NULL)
 \item{level}{integer between 0 and 3 or 4, level of the administrative
 borders, 0 being country borders.}
 
-\item{file_rm}{boolean, if TRUE, remove the dowmloaded file.
-By default, TRUE.}
+\item{path}{character string, name where the download file is also saved. By
+default NULL.}
 
-\item{path}{character string, name where the dowloaded file is saved}
+\item{intlib}{boolean, if the file is saved in the internal library. By
+default NULL.}
 }
 \description{
-Download sp or sf file format from GADM
+Download sp or sf file format from GADM in the internal library of the
+package and/or a specified path and/or a temporary path.
+}
+\details{
+If the `path` and/or `intlib` arguments are `NULL`, it will be asked
+interactively to the user to decide where to store the file. The function
+will return a message is the file is already present in the internal library
+or in the specify path.
+}
+\examples{
+
+# to download file only in a specific path
+kh <- gadm("Cambodia", "sf", 0, path = getwd(), intlib = FALSE)
+
 }
 \author{
 Marc Choisy, Lucie Contamin
