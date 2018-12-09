@@ -11,7 +11,9 @@
 #' @export
 #'
 #' @examples
-#' vn <- gadm("vietnam", "sp", 1)
+#  # download vietnam admin1 administrative map in the internal library and in
+#' # the working direction
+#' vn <- sptools::gadm("vietnam", "sp", 1, path = getwd(), intlib = TRUE)
 #' vn
 #' change_data(vn, data.frame(gaussian = rnorm(63), uniform = runif(63)))
 #'

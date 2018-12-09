@@ -18,7 +18,9 @@ A SpatialPolygonsDataFrame
 Adds variable(s) to a SpatialPolygons
 }
 \examples{
-vn <- gadm("vietnam", "sp", 1)
+# download vietnam admin1 administrative map in the internal library and in
+# the working direction
+vn <- sptools::gadm("vietnam", "sp", 1, path = getwd(), intlib = TRUE)
 vn_nodata <- remove_data_spatialpolygons(vn)
 vn_nodata
 

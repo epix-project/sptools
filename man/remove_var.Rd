@@ -28,7 +28,9 @@ remove_var(stations, 2)
 remove_var(stations)
 
 # An example with a SpatialPoints object:
-vn <- gadm("vietnam", "sp", 1)
+# download vietnam admin1 administrative map in the internal library and in
+# the working direction
+vn <- sptools::gadm("vietnam", "sp", 1, path = getwd(), intlib = TRUE)
 vn
 remove_var(vn, c(6, 9))
 }

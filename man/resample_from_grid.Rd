@@ -30,8 +30,9 @@ library(raster)
 library(wordlpopVN)
 
 
-# The polygon of a country:
-country <- gadm("vietnam", "sp", 0)
+# # download vietnam country administrative map in the internal library and in
+# the working direction
+vn <- sptools::gadm("vietnam", "sp", 0, path = getwd(), intlib = TRUE)
 # The raster of population
 ppp2010 <- worldpopVN::getpop(2010)
 
