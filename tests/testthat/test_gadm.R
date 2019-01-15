@@ -5,10 +5,14 @@ context("`gadm`")
 
 testthat::test_that("`gadm` has the correct behaviour", {
 
-  tmp <- file.path(tempdir())
-  dir.create(tmp)
+  tmp <- getwd()
   test1 <- gadm("Cambodia", "sf", 0, path = tmp, intlib = FALSE)
 
   testthat::expect_equal(dir(tmp) %>% is_in("gadm36_KHM_0_sf.rds", .), TRUE)
-  unlink(tmp, recursive = TRUE)
+  file.remove("gadm36_KHM_0_sf.rds")
+
+  test2 <- gadm("Cambodia", "sf", 0, path = FALSE, intlib = FALSE)
+  testthat::expect_is(test2, c("sf", "data.frame"))
+
+
 })
