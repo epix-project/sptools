@@ -41,7 +41,7 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
   if (!file.exists(pfile)) {
     if(intlib == FALSE & file.exists(paste0(path, file))) {
       message(cat(
-        paste0("\n The file is already present in ", path)))
+        paste0("The file '", file, "' is already present in ", path)))
     } else {
       # download in internal library
       download.file(paste0("https://biogeo.ucdavis.edu/data/gadm3.6/R", format,
@@ -60,7 +60,8 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
         file.rename(pfile, paste0(tmp, file))
         pfile <- paste0(tmp, file)
       }
-    } else if (intlib == FALSE & !file.exists(paste0(path, file))) {
+    } else if (intlib == FALSE & !file.exists(paste0(path, file)) &
+               isFALSE(path)) {
       tmp <- paste0(tempdir(), "/")
       dir.create(tmp, showWarnings = FALSE)
       file.copy(pfile, paste0(tmp, file))
@@ -69,16 +70,16 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
     }
   } else {
     message(cat(
-      paste0("The file is already present in your internal library")))
+      paste0("The file '", file, "' is already present in the library")))
   }
 
-  if(is.null(path) == FALSE) {
+  if(is.null(path) == FALSE & isFALSE(path) == FALSE) {
     if(!file.exists(paste0(path, file))){
-      file.copy(pfile, paste0(path, file), copy.mode = TRUE)
+      file.copy(pfile, paste0(path, "/", file), copy.mode = TRUE)
     } else {
-      pfile <- paste0(path, file)
+      pfile <- paste0(path, "/", file)
     }
-  } else {
+  } else if (isFALSE(path) == FALSE) {
     message(cat(
       paste0("\n Do you want to save the map in another location",
              " (yes/ no) \n")))
@@ -87,7 +88,7 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
       message(cat(paste0("\n Can you provides the path to the location ? \n",
                          "By default, working direction")))
       ans <- readline("Path: ")
-      file.copy(pfile, paste0(ans, file), copy.mode = TRUE)
+      file.copy(pfile, paste0(ans, "/", file), copy.mode = TRUE)
     }
   }
   data <- readRDS(pfile)
