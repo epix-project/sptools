@@ -39,7 +39,7 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
 
   # download file
   if (!file.exists(pfile)) {
-    if(intlib == FALSE & file.exists(paste0(path, file))) {
+    if(isFALSE(intlib) & file.exists(paste0(path, file)) & !is.null(path)) {
       message(cat(
         paste0("The file '", file, "' is already present in ", path)))
     } else {
@@ -75,21 +75,44 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
 
   if(is.null(path) == FALSE & isFALSE(path) == FALSE) {
     if(!file.exists(paste0(path, file))){
-      file.copy(pfile, paste0(path, "/", file), copy.mode = TRUE)
+      file.copy(pfile, paste0(path, "/", file), overwrite = TRUE)
     } else {
       pfile <- paste0(path, "/", file)
     }
   } else if (isFALSE(path) == FALSE) {
     message(cat(
       paste0("\n Do you want to save the map in another location",
-             " (yes/ no) \n")))
+             " (yes/ no (default)) \n")))
     ans <- readline("Selection: ")
     if (ans == "yes") {
       message(cat(paste0("\n Can you provides the path to the location ? \n",
                          "By default, working direction")))
       ans <- readline("Path: ")
+      if (ans == "") {
+        ans <- getwd()
+      }
+      if (file.exists(paste0(ans, "/", file))) {
+        message(cat(
+          paste0("The file '", file, "' is already present in ", ans)))
+      }
       file.copy(pfile, paste0(ans, "/", file), copy.mode = TRUE)
+      if(isFALSE(intlib)) {
+        file.remove(pfile)
+        pfile <- paste0(ans, "/", file)
+      }
+    }
+    if (ans %in% c("no", "")) {
+      tmp <- paste0(tempdir(), "/")
+      dir.create(tmp, showWarnings = FALSE)
+      file.copy(pfile, paste0(tmp, file))
+      file.remove(pfile)
+      pfile <- paste0(tmp, file)
     }
   }
   data <- readRDS(pfile)
+
+  if(exists("tmp")) {
+    file.remove(paste0(tmp, file))
+  }
+  data
 }
