@@ -59,6 +59,10 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
         dir.create(tmp, showWarnings = FALSE)
         file.rename(pfile, paste0(tmp, file))
         pfile <- paste0(tmp, file)
+        intlib <- FALSE
+      }
+      if (ans == "yes") {
+        intlib <- TRUE
       }
     } else if (intlib == FALSE & !file.exists(paste0(path, file)) &
                isFALSE(path)) {
@@ -76,6 +80,10 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
   if(is.null(path) == FALSE & isFALSE(path) == FALSE) {
     if(!file.exists(paste0(path, file))){
       file.copy(pfile, paste0(path, "/", file), overwrite = TRUE)
+      if (isFALSE(intlib)) {
+        file.remove(pfile)
+        pfile <- paste0(path, "/", file)
+      }
     } else {
       pfile <- paste0(path, "/", file)
     }
@@ -105,14 +113,16 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
       tmp <- paste0(tempdir(), "/")
       dir.create(tmp, showWarnings = FALSE)
       file.copy(pfile, paste0(tmp, file))
-      file.remove(pfile)
+      if (isFALSE(intlib) & paste0(dirname(pfile), "/") != tmp) {
+        file.remove(pfile)
+      }
       pfile <- paste0(tmp, file)
     }
   }
   data <- readRDS(pfile)
 
   if(exists("tmp")) {
-    file.remove(paste0(tmp, file))
+    if(file.exists(paste0(tmp, file))) file.remove(paste0(tmp, file))
   }
   data
 }
