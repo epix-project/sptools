@@ -37,6 +37,8 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
   if (!dir.exists(dirname)) dir.create(dirname)
   pfile <- paste0(dirname, file)
 
+  if (isTRUE(path)) path <- getwd()
+
   # download file
   if (!file.exists(pfile)) {
     if(isFALSE(intlib) & file.exists(paste0(path, file)) & !is.null(path)) {
@@ -64,7 +66,7 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
       if (ans == "yes") {
         intlib <- TRUE
       }
-    } else if (intlib == FALSE & !file.exists(paste0(path, file)) &
+    } else if (isFALSE(intlib) & !file.exists(paste0(path, file)) &
                isFALSE(path)) {
       tmp <- paste0(tempdir(), "/")
       dir.create(tmp, showWarnings = FALSE)
@@ -77,7 +79,7 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
       paste0("The file '", file, "' is already present in the library")))
   }
 
-  if(is.null(path) == FALSE & isFALSE(path) == FALSE) {
+  if (!is.null(path) & !isFALSE(path)) {
     if(!file.exists(paste0(path, file))){
       file.copy(pfile, paste0(path, "/", file), overwrite = TRUE)
       if (isFALSE(intlib)) {
@@ -87,7 +89,7 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
     } else {
       pfile <- paste0(path, "/", file)
     }
-  } else if (isFALSE(path) == FALSE) {
+  } else if (is.null(path)) {
     message(cat(
       paste0("\n Do you want to save the map in another location",
              " (yes/ no (default)) \n")))
