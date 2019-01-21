@@ -5,17 +5,26 @@
 #'
 #' If the `path` and/or `intlib` arguments are `NULL`, it will be asked
 #' interactively to the user to decide where to store the file. The function
-#' will return a message is the file is already present in the internal library
-#' or in the specify path.
+#' will return a message if the file is already present in the internal library
+#' or in the specify path. \cr\cr
+#' The argument `path` can be input with 3 types: `NULL`, boolean (`FALSE`,
+#' `TRUE`) or a character string and the argument `intlib` support 2 types:
+#' `NULL`,boolean (`FALSE`, `TRUE`).
+#' The graph will show you the interaction between these two arguments
+#' to download sp or sf file format from GADM:
+#'
+#' \figure{graph_gadm.png}{}
 #'
 #' @param country character string, name of the country to download
 #' @param format character string, format to downlaod, either sp or sf
 #' @param level integer between 0 and 3 or 4, level of the administrative
 #'   borders, 0 being country borders.
-#' @param path character string, name where the download file is also saved. By
-#'   default NULL.
-#' @param intlib boolean, if the file is saved in the internal library. By
-#'   default NULL.
+#' @param path character string or boolean, path of where the downloaded file
+#' should be saved.  By default \code{NULL}. See `Details` for more information.
+#' the downloaded file is not saved in any user-defined location..
+#' @param intlib boolean, specifies whether the downloaded file should be saved
+#' in the library of packages. By default \code{NULL}. See `Details` for more
+#' information.
 #'
 #' @author Marc Choisy, Lucie Contamin
 #'
