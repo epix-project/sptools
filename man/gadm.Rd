@@ -16,7 +16,7 @@ borders, 0 being country borders.}
 
 \item{path}{character string or boolean, path of where the downloaded file
 should be saved.  By default \code{NULL}. See `Details` for more information.
-the downloaded file is not saved in any user-defined location..}
+the downloaded file is not saved in any user-defined location.}
 
 \item{intlib}{boolean, specifies whether the downloaded file should be saved
 in the library of packages. By default \code{NULL}. See `Details` for more
