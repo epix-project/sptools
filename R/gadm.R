@@ -21,7 +21,7 @@
 #'   borders, 0 being country borders.
 #' @param path character string or boolean, path of where the downloaded file
 #' should be saved.  By default \code{NULL}. See `Details` for more information.
-#' the downloaded file is not saved in any user-defined location..
+#' the downloaded file is not saved in any user-defined location.
 #' @param intlib boolean, specifies whether the downloaded file should be saved
 #' in the library of packages. By default \code{NULL}. See `Details` for more
 #' information.
@@ -50,9 +50,8 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
 
   # download file
   if (!file.exists(pfile)) {
-    if(isFALSE(intlib) & file.exists(paste0(path, file)) & !is.null(path)) {
-      message(cat(
-        paste0("The file '", file, "' is already present in ", path)))
+    if (isFALSE(intlib) & file.exists(paste0(path, file)) & !is.null(path)) {
+      message(cat("The file '", file, "' is already present in ", path))
     } else {
       # download in internal library
       download.file(paste0("https://biogeo.ucdavis.edu/data/gadm3.6/R", format,
@@ -61,9 +60,8 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
 
     if (is.null(intlib)) {
       # download in internal library
-      message(cat(
-        paste0("\n Do you want to download it in your internal library ?",
-               "  (yes/ no) ? \n")))
+      message(cat("\n Do you want to download it in your internal library ?",
+               "  (yes/ no) ? \n"))
       ans <- readline("Selection: ")
       if (ans == "no") {
         tmp <- paste0(tempdir(), "/")
@@ -85,11 +83,11 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
     }
   } else {
     message(cat(
-      paste0("The file '", file, "' is already present in the library")))
+      "The file '", file, "' is already present in the library"))
   }
 
   if (!is.null(path) & !isFALSE(path)) {
-    if(!file.exists(paste0(path, file))){
+    if (!file.exists(paste0(path, file))){
       file.copy(pfile, paste0(path, "/", file), overwrite = TRUE)
       if (isFALSE(intlib)) {
         file.remove(pfile)
@@ -100,22 +98,22 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
     }
   } else if (is.null(path)) {
     message(cat(
-      paste0("\n Do you want to save the map in another location",
-             " (yes/ no (default)) \n")))
+      "\n Do you want to save the map in another location",
+      " (yes/ no (default)) \n"))
     ans <- readline("Selection: ")
     if (ans == "yes") {
-      message(cat(paste0("\n Can you provides the path to the location ? \n",
-                         "By default, working direction")))
+      message(cat("\n Can you provides the path to the location ? \n",
+                         "By default, working direction"))
       ans <- readline("Path: ")
       if (ans == "") {
         ans <- getwd()
       }
       if (file.exists(paste0(ans, "/", file))) {
         message(cat(
-          paste0("The file '", file, "' is already present in ", ans)))
+          "The file '", file, "' is already present in ", ans))
       }
       file.copy(pfile, paste0(ans, "/", file), copy.mode = TRUE)
-      if(isFALSE(intlib)) {
+      if (isFALSE(intlib)) {
         file.remove(pfile)
         pfile <- paste0(ans, "/", file)
       }
@@ -132,8 +130,8 @@ gadm <- function(country, format, level, path = NULL, intlib = NULL) {
   }
   data <- readRDS(pfile)
 
-  if(exists("tmp")) {
-    if(file.exists(paste0(tmp, file))) file.remove(paste0(tmp, file))
+  if (exists("tmp")) {
+    if (file.exists(paste0(tmp, file))) file.remove(paste0(tmp, file))
   }
   data
 }
