@@ -49,9 +49,9 @@ to download and path to saved sp or sf file format from GADM:
 |    |     |-- path = PATH
 |    |         *-- PATH
 |    |-- save == NULL
-|    |     *-- `Do you want to save the map in another location ?`
+|    |     *-- `Do you want to save the map in another location?`
 |    |         |-- Yes
-|    |             |-- `Can you provide the path to the location ?`
+|    |             |-- `Can you provide the path to the location?`
 |    |             |    *-- working directory (default)
 |    |             |    *-- PATH
 |    |         |-- No (default)
@@ -64,14 +64,14 @@ to download and path to saved sp or sf file format from GADM:
 |    |     |-- path = PATH
 |    |         *-- internal library + PATH
 |    |-- save == NULL
-|    |     *-- `Do you want to save the map in another location ?`
+|    |     *-- `Do you want to save the map in another location?`
 |    |         |-- Yes
-|    |             |-- `Can you provide the path to the location ?`
+|    |             |-- `Can you provide the path to the location?`
 |    |             |    *-- internal library+ working directory (default)
 |    |             |    *-- internal library+ PATH
 |    |         |-- No (default)
 |--intlib == NULL
-     |-- `Do you want to save the map in your internal library ?`
+     |-- `Do you want to save the map in your internal library?`
            *-- no >> intlib = FALSE
            *-- yes >> intlib = TRUE
 }

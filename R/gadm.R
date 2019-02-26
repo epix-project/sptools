@@ -45,9 +45,9 @@ download_file <- function(file, alt_path, format) {
 #' |    |     |-- path = PATH
 #' |    |         *-- PATH
 #' |    |-- save == NULL
-#' |    |     *-- `Do you want to save the map in another location ?`
+#' |    |     *-- `Do you want to save the map in another location?`
 #' |    |         |-- Yes
-#' |    |             |-- `Can you provide the path to the location ?`
+#' |    |             |-- `Can you provide the path to the location?`
 #' |    |             |    *-- working directory (default)
 #' |    |             |    *-- PATH
 #' |    |         |-- No (default)
@@ -60,14 +60,14 @@ download_file <- function(file, alt_path, format) {
 #' |    |     |-- path = PATH
 #' |    |         *-- internal library + PATH
 #' |    |-- save == NULL
-#' |    |     *-- `Do you want to save the map in another location ?`
+#' |    |     *-- `Do you want to save the map in another location?`
 #' |    |         |-- Yes
-#' |    |             |-- `Can you provide the path to the location ?`
+#' |    |             |-- `Can you provide the path to the location?`
 #' |    |             |    *-- internal library+ working directory (default)
 #' |    |             |    *-- internal library+ PATH
 #' |    |         |-- No (default)
 #' |--intlib == NULL
-#'      |-- `Do you want to save the map in your internal library ?`
+#'      |-- `Do you want to save the map in your internal library?`
 #'            *-- no >> intlib = FALSE
 #'            *-- yes >> intlib = TRUE
 #'}
@@ -123,7 +123,7 @@ gadm <- function(country, format, level, intlib = TRUE, save = FALSE,
                 " (yes/ no (default)) \n"))
     ans <- readline("Selection: ")
     if (ans == "yes") {
-      message(cat("\n Can you provides the path to the location ? \n",
+      message(cat("\n Can you provides the path to the location? \n",
                   "By default, working direction"))
       ans2 <- readline("Path: ")
       if (ans2 == "") {
@@ -159,8 +159,8 @@ gadm <- function(country, format, level, intlib = TRUE, save = FALSE,
   # Save the file in the correct path
   file.copy(pfile, path)
   if (is.null(intlib)) {
-    message(cat("\n Do you want to download it in your internal library ?",
-                "  (yes (default) / no) ? \n"))
+    message(cat("\n Do you want to download it in your internal library?",
+                "  (yes (default) / no)? \n"))
     ans <- readline("Selection: ")
     if (ans == "no") {
       intlib <- FALSE
