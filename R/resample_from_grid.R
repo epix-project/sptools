@@ -28,7 +28,7 @@
 #'
 #' # # download vietnam country administrative map in the internal library and in
 #' # the working direction
-#' vn <- sptools::gadm("vietnam", "sf", 0, path = getwd(), intlib = TRUE)
+#' vn <- sptools::gadm("vietnam", "sf", 0, intlib = TRUE, save = TRUE)
 #' # The raster of population
 #' ppp2010 <- worldpopVN::getpop(2010)
 #'

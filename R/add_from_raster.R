@@ -21,7 +21,7 @@
 #'
 #' # download vietnam country administrative map in the internal library and in
 #' # the working direction
-#' vn <- sptools::gadm("vietnam", "sp", 0, path = getwd(), intlib = TRUE)
+#' vn <- sptools::gadm("vietnam", "sp", 0, intlib = TRUE, save = TRUE)
 #'
 #' # With a SpatialPointsDataFrame
 #' value <- vn %>%

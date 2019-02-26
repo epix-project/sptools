@@ -20,7 +20,7 @@ Adds variable(s) to a SpatialPolygons
 \examples{
 # download vietnam admin1 administrative map in the internal library and in
 # the working direction
-vn <- sptools::gadm("vietnam", "sp", 1, path = getwd(), intlib = TRUE)
+vn <- sptools::gadm("vietnam", "sp", 1, intlib = TRUE, save = TRUE)
 vn_nodata <- remove_data_spatialpolygons(vn)
 vn_nodata
 

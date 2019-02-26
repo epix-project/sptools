@@ -14,8 +14,7 @@
 #' @examples
 #'
 #' library(worldpopVN)
-#' provinces <- sptools::gadm("vietnam", "sp", 1, path = getwd(),
-#'    intlib = FALSE)
+#' provinces <- sptools::gadm("vietnam", "sp", 1, intlib = FALSE, save = TRUE)
 #' ppp2010 <- worldpopVN::getpop(2010)
 #'
 #' hanoi <- sptools::crop_on_poly(ppp2010, subset(provinces,

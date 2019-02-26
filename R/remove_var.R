@@ -20,7 +20,7 @@
 #' # An example with a SpatialPoints object:
 #'# download vietnam admin1 administrative map in the internal library and in
 #' # the working direction
-#' vn <- sptools::gadm("vietnam", "sp", 1, path = getwd(), intlib = TRUE)
+#' vn <- sptools::gadm("vietnam", "sp", 1, intlib = TRUE, save = TRUE)
 #' vn
 #' remove_var(vn, c(6, 9))
 remove_var <- function(spdf, var = NULL) {

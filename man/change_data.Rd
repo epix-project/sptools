@@ -20,7 +20,7 @@ The aim of this function is to propose an alternative to the bug reported
 }
 \examples{
 # the working direction
-vn <- sptools::gadm("vietnam", "sp", 1, path = getwd(), intlib = TRUE)
+vn <- sptools::gadm("vietnam", "sp", 1, intlib = TRUE, save = TRUE)
 vn
 change_data(vn, data.frame(gaussian = rnorm(63), uniform = runif(63)))
 

@@ -12,7 +12,7 @@
 #'
 #' # download vietnam admin1 administrative map in the internal library and in
 #' # the working direction
-#' vn <- sptools::gadm("vietnam", "sp", 1, path = getwd(), intlib = TRUE)
+#' vn <- sptools::gadm("vietnam", "sp", 1, intlib = TRUE, save = TRUE)
 #' vn
 #' vn %<>% add_variable_spdf(rnorm(63))
 #' vn
@@ -48,7 +48,7 @@ add_variable_spdf <- function(spdf, df) {
 #' @examples
 #' # download vietnam admin1 administrative map in the internal library and in
 #' # the working direction
-#' vn <- sptools::gadm("vietnam", "sp", 1, path = getwd(), intlib = TRUE)
+#' vn <- sptools::gadm("vietnam", "sp", 1, intlib = TRUE, save = TRUE)
 #' vn_nodata <- remove_data_spatialpolygons(vn)
 #' vn_nodata
 #'
