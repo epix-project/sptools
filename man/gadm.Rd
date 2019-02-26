@@ -37,7 +37,44 @@ be asked interactively to the user to decide where to store the file. The
 function will return a message if the file is already present in the internal
 library or in the specify path. \cr\cr
 The table will show you the interaction between these two arguments
-to download sp or sf file format from GADM:
+to download and path to saved sp or sf file format from GADM:
+\cr
+\verb{
+|--intlib == FALSE
+|    |-- save == FALSE
+|    |     *-- no disk memory
+|    |-- save == TRUE
+|    |     |-- path = NULL
+|    |         *-- working directory
+|    |     |-- path = PATH
+|    |         *-- PATH
+|    |-- save == NULL
+|    |     *-- `Do you want to save the map in another location ?`
+|    |         |-- Yes
+|    |             |-- `Can you provide the path to the location ?`
+|    |             |    *-- working directory (default)
+|    |             |    *-- PATH
+|    |         |-- No (default)
+|--intlib == TRUE
+|    |-- save == FALSE
+|    |     *-- internal library
+|    |-- save == TRUE
+|    |     |-- path = NULL
+|    |         *-- internal library + working directory
+|    |     |-- path = PATH
+|    |         *-- internal library + PATH
+|    |-- save == NULL
+|    |     *-- `Do you want to save the map in another location ?`
+|    |         |-- Yes
+|    |             |-- `Can you provide the path to the location ?`
+|    |             |    *-- internal library+ working directory (default)
+|    |             |    *-- internal library+ PATH
+|    |         |-- No (default)
+|--intlib == NULL
+     |-- `Do you want to save the map in your internal library ?`
+           *-- no >> intlib = FALSE
+           *-- yes >> intlib = TRUE
+}
 }
 \examples{
 
