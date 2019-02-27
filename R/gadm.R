@@ -44,37 +44,37 @@ download_file <- function(file, alt_path, format, force) {
 #' to download and path to saved sp or sf file format from GADM:
 #' \cr
 #' \verb{
-#' |--intlib == FALSE
-#' |    |-- save == FALSE
+#' |--intlib = FALSE
+#' |    |-- save = FALSE
 #' |    |     *-- no disk memory
-#' |    |-- save == TRUE
+#' |    |-- save = TRUE
 #' |    |     |-- path = NULL
 #' |    |         *-- working directory
 #' |    |     |-- path = PATH
 #' |    |         *-- PATH
-#' |    |-- save == NULL
+#' |    |-- save = NULL
 #' |    |     *-- `Do you want to save the map in another location?`
 #' |    |         |-- Yes
 #' |    |             |-- `Can you provide the path to the location?`
 #' |    |             |    *-- working directory (default)
 #' |    |             |    *-- PATH
 #' |    |         |-- No (default)
-#' |--intlib == TRUE
-#' |    |-- save == FALSE
+#' |--intlib = TRUE
+#' |    |-- save = FALSE
 #' |    |     *-- internal library
-#' |    |-- save == TRUE
+#' |    |-- save = TRUE
 #' |    |     |-- path = NULL
 #' |    |         *-- internal library + working directory
 #' |    |     |-- path = PATH
 #' |    |         *-- internal library + PATH
-#' |    |-- save == NULL
+#' |    |-- save = NULL
 #' |    |     *-- `Do you want to save the map in another location?`
 #' |    |         |-- Yes
 #' |    |             |-- `Can you provide the path to the location?`
 #' |    |             |    *-- internal library+ working directory (default)
 #' |    |             |    *-- internal library+ PATH
 #' |    |         |-- No (default)
-#' |--intlib == NULL
+#' |--intlib = NULL
 #'      |-- `Do you want to save the map in your internal library?`
 #'            *-- no >> intlib = FALSE
 #'            *-- yes >> intlib = TRUE
