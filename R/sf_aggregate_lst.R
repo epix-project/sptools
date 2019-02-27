@@ -62,11 +62,11 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
         sf::st_as_sf() %>%
         group_by(.dots = col_name) %>%
         st_union(by_feature = TRUE) %>%
-        st_cast("MULTIPOLYGON") %>%
         ungroup
       # Update the new information in the general data frame
       df <- rbind(tmp$`TRUE`, tmp$`FALSE`) %>%
-        arrange(!! sym(eval(col_name)))
+        arrange(!! sym(eval(col_name))) %>%
+        st_cast("MULTIPOLYGON")
     }
 
     # For the split event
@@ -84,7 +84,7 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
       }
 
       # calculate the new geometry
-      geom <- st_union(tmp$`TRUE`) %>% st_cast("MULTIPOLYGON")
+      geom <- st_union(tmp$`TRUE`)
       # Update the new spatial definition (name and geometry) in the data frame
       # selected
       tmp$`TRUE` %<>% mutate(new_var = event$before %>% unlist,
@@ -93,7 +93,8 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
         distinct %>%
         rename(!! col_name := new_var)
       # Update the new information in the general data frame
-      df <- rbind(tmp$`TRUE`, tmp$`FALSE`)
+      df <- rbind(tmp$`TRUE`, tmp$`FALSE`) %>%
+        st_cast("MULTIPOLYGON")
     }
 
     # Event rename
@@ -172,6 +173,8 @@ sf_aggregate_lst <- function(df_sf, history_lst, from, to = "2018-12-31") {
                                           col_name2 = col_name2) %>%
                      group_by(.dots = col_name) %>%
                      summarise)
+  class(df_agg) <- c("sf", "data.frame")
+  df_agg %<>% st_cast("MULTIPOLYGON")
 }
 
 ## quiets concerns of R CMD check for the values that appear in pipelines

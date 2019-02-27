@@ -23,7 +23,9 @@ Based on the \code{\link[raster]{extract}} function.
 library(sp)
 library(magrittr) # for " \%>\% "
 
-vn <- sptools::gadm("vietnam", "sp", 0)
+# download vietnam country administrative map in the internal library and in
+# the working direction
+vn <- sptools::gadm("vietnam", "sp", 0, intlib = TRUE, save = TRUE)
 
 # With a SpatialPointsDataFrame
 value <- vn \%>\%

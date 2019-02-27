@@ -4,7 +4,8 @@
 \alias{gadm}
 \title{Get GADM data}
 \usage{
-gadm(country, format, level, file_rm = TRUE, path = NULL)
+gadm(country, format, level, intlib = TRUE, save = FALSE,
+  path = NULL, force = FALSE)
 }
 \arguments{
 \item{country}{character string, name of the country to download}
@@ -14,13 +15,82 @@ gadm(country, format, level, file_rm = TRUE, path = NULL)
 \item{level}{integer between 0 and 3 or 4, level of the administrative
 borders, 0 being country borders.}
 
-\item{file_rm}{boolean, if TRUE, remove the dowmloaded file.
-By default, TRUE.}
+\item{intlib}{boolean, specifies whether the downloaded file should be saved
+in the library of packages. If \code{NULL}, it will be asked interactively.
+By default \code{TRUE}, see `Details` for more information.}
 
-\item{path}{character string, name where the dowloaded file is saved}
+\item{save}{boolean, specifies whether the downloaded file should be saved
+in a specific path or not. If \code{NULL}, it will be asked interactively.
+By default \code{FALSE}, see `Details` for more information.}
+
+\item{path}{character string, path to save the downloaded file. If
+\code{NULL}, the file will be saved in the working directory. By default
+\code{NULL}, see `Details` for more information.}
+
+\item{force}{boolean, force to download the file even if already in the path.
+By default \code{FALSE}.}
 }
 \description{
-Download sp or sf file format from GADM
+Download sp or sf file format from GADM in the internal library of the
+package and/or a specified path and/or a temporary path.
+}
+\details{
+If the \code{save} and/or \code{intlib} arguments are \code{NULL}, it will
+be asked interactively to the user to decide where to store the file. The
+function will return a message if the file is already present in the internal
+library or in the specify path. The function will only download the file if
+it's not available in the internal library and the path inputted but the
+download can be forced (argument \code{force == TRUE}) if the file present
+has a problem.
+\cr\cr
+The table will show you the interaction between these two arguments
+to download and path to saved sp or sf file format from GADM:
+\cr
+\verb{
+|--intlib = FALSE
+|    |-- save = FALSE
+|    |     *-- no disk memory
+|    |-- save = TRUE
+|    |     |-- path = NULL
+|    |         *-- working directory
+|    |     |-- path = PATH
+|    |         *-- PATH
+|    |-- save = NULL
+|    |     |-- `Do you want to save the map in another location?`
+|    |         |-- yes
+|    |             |-- `Can you provide the path to the location?`
+|    |             |    *-- working directory (default)
+|    |             |    *-- PATH
+|    |         |-- no (default)
+|--intlib = TRUE
+|    |-- save = FALSE
+|    |     *-- internal library
+|    |-- save = TRUE
+|    |     |-- path = NULL
+|    |         *-- internal library + working directory
+|    |     |-- path = PATH
+|    |         *-- internal library + PATH
+|    |-- save = NULL
+|    |     |-- `Do you want to save the map in another location?`
+|    |         |-- yes
+|    |             |-- `Can you provide the path to the location?`
+|    |             |    *-- internal library+ working directory (default)
+|    |             |    *-- internal library+ PATH
+|    |         |-- no (default)
+|--intlib = NULL
+     |-- `Do you want to save the map in your internal library?`
+           *-- no >> intlib = FALSE
+           *-- yes >> intlib = TRUE
+}
+}
+\examples{
+
+# to download Cambodia country administrative boundaries
+kh <- gadm("Cambodia", "sf", 0)
+
+#' # to download Vietnam only in the working directory
+vn <- gadm("Vietnam", "sf", 0, intlib = FALSE, save = TRUE)
+
 }
 \author{
 Marc Choisy, Lucie Contamin

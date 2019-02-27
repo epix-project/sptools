@@ -19,7 +19,8 @@ The aim of this function is to propose an alternative to the bug reported
 \href{https://github.com/edzer/sp/issues/56}{here}.
 }
 \examples{
-vn <- gadm("vietnam", "sp", 1)
+# the working direction
+vn <- sptools::gadm("vietnam", "sp", 1, intlib = TRUE, save = TRUE)
 vn
 change_data(vn, data.frame(gaussian = rnorm(63), uniform = runif(63)))
 

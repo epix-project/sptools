@@ -7,9 +7,11 @@
 #'
 #' library(sf)
 #' library(dplyr)
+#' # download vietnam admin1 administrative map in the internal library and in
+#' # the working direction
+#' vn <- sptools::gadm("vietnam", "sf", 1, intlib = TRUE, save = TRUE)
 #'
-#' provinces <- provinces <- "vietnam" %>%
-#'   sptools::gadm("sf", 1) %>%
+#' provinces <- vn %>%
 #'   transmute(province = VARNAME_1) %>%
 #'   as("Spatial")
 #' srtm <- srtmVN::getsrtm()

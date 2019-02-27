@@ -20,7 +20,9 @@ Adds variable(s) to a Spatial*DataFrame
 \examples{
 library(magrittr)
 
-vn <- gadm("vietnam", "sp", 1)
+# download vietnam admin1 administrative map in the internal library and in
+# the working direction
+vn <- sptools::gadm("vietnam", "sp", 1, intlib = TRUE, save = TRUE)
 vn
 vn \%<>\% add_variable_spdf(rnorm(63))
 vn

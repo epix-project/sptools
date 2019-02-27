@@ -1,15 +1,28 @@
 library(dictionary) # for "XX_history", "XX_province"
+library(magrittr)   # for " %>% ", "is_in
 
 context("`gadm`")
 
 testthat::test_that("`gadm` has the correct behaviour", {
 
-  tmp <- file.path(tempdir(), "pkgtest")
-  dir.create(tmp)
-  gadm("Cambodia", "sf", 0, file_rm = FALSE, path = tmp)
+  tmp <- getwd()
+  test1 <- gadm("Cambodia", "sf", 0, path = NULL, intlib = FALSE, save = TRUE)
 
-  test1 <- dir(tmp)
+  testthat::expect_equal(dir(tmp) %>% is_in("gadm36_KHM_0_sf.rds", .), TRUE)
+  file.remove("gadm36_KHM_0_sf.rds")
 
-  testthat::expect_equal(test1, "gadm36_KHM_0_sf.rds")
-  unlink(tmp, recursive = TRUE)
+  test2 <- gadm("Cambodia", "sf", 0, save = FALSE, intlib = FALSE)
+  testthat::expect_is(test2, c("sf", "data.frame"))
+
+  test3 <- gadm("Cambodia", "sf", 0, save = FALSE, intlib = TRUE)
+  test4 <- capture.output(gadm("Cambodia", "sf", 0))
+  testthat::expect_equal(test4[1],
+                         "The file 'gadm36_KHM_0_sf.rds' is already present in the internal library.Simple feature collection with 1 feature and 2 fields")
+  test5 <- capture.output(gadm("Cambodia", "sf", 0, force = TRUE))
+  testthat::expect_equal(test5[1],
+                      "Simple feature collection with 1 feature and 2 fields")
+
+  test6 <- gadm("Cambodia", "sf", 0, intlib = NULL, save = NULL)
+  testthat::expect_is(test6, c("sf", "data.frame"))
+
 })
