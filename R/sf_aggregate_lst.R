@@ -13,7 +13,7 @@
 #' @keywords internal
 #' @noRd
 select_events <- function(hist_lst, from, to) {
-  sel0 <- purrr::map(hist_lst, "year") %>% unlist %>% as.Date()
+  sel0 <- purrr::map(hist_lst, "year") %>% unlist() %>% as.Date()
   sel0 <- sel0 > as.Date(paste0(from, "-01-01")) &
     sel0 <= as.Date(paste0(to, "-12-31"))
   event_lst <- hist_lst[sel0]
@@ -51,8 +51,8 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 
     # For the complexe merge event
     if (event$event == "complexe merge") {
-      suppressWarnings(tmp <-  split(df, f = df[, col_name] %>% unlist %in%
-                                       event$after %>% unlist))
+      suppressWarnings(tmp <-  split(df, f = df[, col_name] %>% unlist() %in%
+                                       event$after %>% unlist()))
       # calculate the new geometry and update the new spatial definition (name
       # and geometry) in the data frame selected
       tmp$`TRUE` %<>%
@@ -62,7 +62,7 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
         sf::st_as_sf() %>%
         group_by(.dots = col_name) %>%
         st_union(by_feature = TRUE) %>%
-        ungroup
+        ungroup()
       # Update the new information in the general data frame
       df <- rbind(tmp$`TRUE`, tmp$`FALSE`) %>%
         arrange(!! sym(eval(col_name))) %>%
@@ -74,23 +74,23 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
       # Split the data frame to select the province that we need to merge
       # together
       if (event$event == "split") {
-        suppressWarnings(tmp <-  split(df, f = df[, col_name] %>% unlist %in%
-                                         event$after %>% unlist))
+        suppressWarnings(tmp <-  split(df, f = df[, col_name] %>% unlist() %in%
+                                         event$after %>% unlist()))
       } else {
         suppressWarnings(tmp <-  split(df, f = is.element(df[, col_name2] %>%
-                                                 unlist,
+                                                 unlist(),
                                                  event$d.after$district %>%
-                                                   unlist %>% na.omit)))
+                                                   unlist() %>% na.omit())))
       }
 
       # calculate the new geometry
       geom <- st_union(tmp$`TRUE`)
       # Update the new spatial definition (name and geometry) in the data frame
       # selected
-      tmp$`TRUE` %<>% dplyr::mutate(new_var = event$before %>% unlist,
+      tmp$`TRUE` %<>% dplyr::mutate(new_var = event$before %>% unlist(),
                              geometry = geom) %>%
         select(- !! col_name) %>%
-        distinct %>%
+        distinct() %>%
         rename(!! col_name := new_var)
       # Update the new information in the general data frame
       df <- rbind(tmp$`TRUE`, tmp$`FALSE`) %>%
@@ -172,7 +172,7 @@ sf_aggregate_lst <- function(df_sf, history_lst, from, to = "2018-12-31") {
   suppressWarnings(df_agg <- aggregate_sf(df, event_lst, col_name,
                                           col_name2 = col_name2) %>%
                      group_by(.dots = col_name) %>%
-                     summarise)
+                     summarise())
   class(df_agg) <- c("sf", "data.frame")
   df_agg %<>% st_cast("MULTIPOLYGON")
 }
