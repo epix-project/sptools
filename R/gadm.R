@@ -53,12 +53,12 @@ download_file <- function(file, alt_path, format, force) {
 #' |    |     |-- path = PATH
 #' |    |         *-- PATH
 #' |    |-- save = NULL
-#' |    |     *-- `Do you want to save the map in another location?`
-#' |    |         |-- Yes
+#' |    |     |-- `Do you want to save the map in another location?`
+#' |    |         |-- yes
 #' |    |             |-- `Can you provide the path to the location?`
 #' |    |             |    *-- working directory (default)
 #' |    |             |    *-- PATH
-#' |    |         |-- No (default)
+#' |    |         |-- no (default)
 #' |--intlib = TRUE
 #' |    |-- save = FALSE
 #' |    |     *-- internal library
@@ -68,12 +68,12 @@ download_file <- function(file, alt_path, format, force) {
 #' |    |     |-- path = PATH
 #' |    |         *-- internal library + PATH
 #' |    |-- save = NULL
-#' |    |     *-- `Do you want to save the map in another location?`
-#' |    |         |-- Yes
+#' |    |     |-- `Do you want to save the map in another location?`
+#' |    |         |-- yes
 #' |    |             |-- `Can you provide the path to the location?`
 #' |    |             |    *-- internal library+ working directory (default)
 #' |    |             |    *-- internal library+ PATH
-#' |    |         |-- No (default)
+#' |    |         |-- no (default)
 #' |--intlib = NULL
 #'      |-- `Do you want to save the map in your internal library?`
 #'            *-- no >> intlib = FALSE
