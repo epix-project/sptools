@@ -87,7 +87,7 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
       geom <- st_union(tmp$`TRUE`)
       # Update the new spatial definition (name and geometry) in the data frame
       # selected
-      tmp$`TRUE` %<>% mutate(new_var = event$before %>% unlist,
+      tmp$`TRUE` %<>% dplyr::mutate(new_var = event$before %>% unlist,
                              geometry = geom) %>%
         select(- !! col_name) %>%
         distinct %>%
@@ -141,6 +141,7 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 #' @importFrom sf st_union st_cast st_join
 #' @importFrom magrittr %>% %<>%
 #' @importFrom stats na.omit
+#' @importFrom rlang :=
 #'
 #' @examples
 #'
@@ -178,5 +179,5 @@ sf_aggregate_lst <- function(df_sf, history_lst, from, to = "2018-12-31") {
 }
 
 ## quiets concerns of R CMD check for the values that appear in pipelines
-if (getRversion() >= "2.15.1")  utils::globalVariables(c(":=", "geometry",
-                                                        "new_var", "."))
+if (getRversion() >= "2.15.1")  utils::globalVariables(c("geometry", "new_var",
+                                                         "."))
