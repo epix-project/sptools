@@ -34,6 +34,7 @@ Imports:
     countrycode,
     methods,
     sf,
+    rlang,
     dplyr,
     purrr,
     tidyr,
