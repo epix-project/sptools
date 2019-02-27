@@ -41,7 +41,6 @@ For each `split event`, the geometry of the variables contained  in the slot
  `geometry`
 }
 \examples{
-
  # to have the list of split/merge/rename event for Vietnam
  vn_history <- dictionary::vn_history
 

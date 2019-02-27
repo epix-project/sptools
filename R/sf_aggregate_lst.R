@@ -144,7 +144,6 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 #' @importFrom rlang := !!
 #'
 #' @examples
-#'
 #'  # to have the list of split/merge/rename event for Vietnam
 #'  vn_history <- dictionary::vn_history
 #'
