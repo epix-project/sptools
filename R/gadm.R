@@ -9,16 +9,20 @@
 #' the download files
 #' @param format character string, format to downlaod, either sp or sf
 #' @noRd
-download_file <- function(file, alt_path, format) {
+download_file <- function(file, alt_path, format, force) {
   alt_file <- paste0(alt_path, "/", basename(file))
   if (file.exists(alt_file)) {
     ndfile <- alt_file[file.exists(alt_file)] # files not to download
     file.copy(ndfile, paste0(dirname(file), "/", basename(ndfile)))
   }
-  if (any(!file.exists(file))) {
-    file <- file[!file.exists(file)]  # file to download
+  if ((file.exists(file) & isTRUE(force))) {
     download.file(paste0("https://biogeo.ucdavis.edu/data/gadm3.6/R", format,
                          "/", basename(file)), file, mode = "wb")
+  }
+  if (any(!file.exists(file))) {
+      file <- file[!file.exists(file)]  # file to download
+      download.file(paste0("https://biogeo.ucdavis.edu/data/gadm3.6/R", format,
+                           "/", basename(file)), file, mode = "wb")
   }
 }
 
@@ -31,7 +35,11 @@ download_file <- function(file, alt_path, format) {
 #' If the \code{save} and/or \code{intlib} arguments are \code{NULL}, it will
 #' be asked interactively to the user to decide where to store the file. The
 #' function will return a message if the file is already present in the internal
-#' library or in the specify path. \cr\cr
+#' library or in the specify path. The function will only download the file if
+#' it's not available in the internal library and the path inputted but the
+#' download can be forced (argument \code{force == TRUE}) if the file present
+#' has a problem.
+#' \cr\cr
 #' The table will show you the interaction between these two arguments
 #' to download and path to saved sp or sf file format from GADM:
 #' \cr
@@ -86,6 +94,8 @@ download_file <- function(file, alt_path, format) {
 #' @param path character string, path to save the downloaded file. If
 #' \code{NULL}, the file will be saved in the working directory. By default
 #' \code{NULL}, see `Details` for more information.
+#' @param force boolean, force to download the file even if already in the path.
+#' By default \code{FALSE}.
 #'
 #' @author Marc Choisy, Lucie Contamin
 #'
@@ -101,7 +111,7 @@ download_file <- function(file, alt_path, format) {
 #'
 #' @export
 gadm <- function(country, format, level, intlib = TRUE, save = FALSE,
-                 path = NULL) {
+                 path = NULL, force = FALSE) {
 
   # prerequisite
   country <- countrycode(country, "country.name", "iso3c")
@@ -143,17 +153,21 @@ gadm <- function(country, format, level, intlib = TRUE, save = FALSE,
 
   # download file
   if (any(!file.exists(pfile))) {
-    if (isFALSE(intlib) & file.exists(path)) {
+    if (isFALSE(intlib) & file.exists(path) & isFALSE(force)) {
         message(cat(
           "The file '", file, "' is already present in ",
           unique(dirname(path)), sep = ""))
     }
-    download_file(pfile, dirname(path), format = format)
+    download_file(pfile, dirname(path), format = format, force = force)
 
   } else if (file.exists(pfile)){
+    if (isTRUE(force)) {
+      download_file(pfile, dirname(path), format = format, force = force)
+    } else {
       message(cat(
         "The file '", file, "' is already present in the internal library.",
         sep = ""))
+    }
   }
 
   # Save the file in the correct path

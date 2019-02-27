@@ -5,7 +5,7 @@
 \title{Get GADM data}
 \usage{
 gadm(country, format, level, intlib = TRUE, save = FALSE,
-  path = NULL)
+  path = NULL, force = FALSE)
 }
 \arguments{
 \item{country}{character string, name of the country to download}
@@ -26,6 +26,9 @@ By default \code{FALSE}, see `Details` for more information.}
 \item{path}{character string, path to save the downloaded file. If
 \code{NULL}, the file will be saved in the working directory. By default
 \code{NULL}, see `Details` for more information.}
+
+\item{force}{boolean, force to download the file even if already in the path.
+By default \code{FALSE}.}
 }
 \description{
 Download sp or sf file format from GADM in the internal library of the
@@ -35,7 +38,11 @@ package and/or a specified path and/or a temporary path.
 If the \code{save} and/or \code{intlib} arguments are \code{NULL}, it will
 be asked interactively to the user to decide where to store the file. The
 function will return a message if the file is already present in the internal
-library or in the specify path. \cr\cr
+library or in the specify path. The function will only download the file if
+it's not available in the internal library and the path inputted but the
+download can be forced (argument \code{force == TRUE}) if the file present
+has a problem.
+\cr\cr
 The table will show you the interaction between these two arguments
 to download and path to saved sp or sf file format from GADM:
 \cr
