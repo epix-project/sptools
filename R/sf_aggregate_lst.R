@@ -90,7 +90,7 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
       tmp$`TRUE` %<>% dplyr::mutate(new_var = event$before %>% unlist(),
                              geometry = geom) %>%
         select(- !! col_name) %>%
-        distinct() %>%
+        distinct(.keep_all = TRUE) %>%
         rename(!! col_name := new_var)
       # Update the new information in the general data frame
       df <- rbind(tmp$`TRUE`, tmp$`FALSE`) %>%
