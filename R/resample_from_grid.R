@@ -13,7 +13,6 @@
 #'
 #' @return A \code{RasterLayer} object.
 #'
-#' @importFrom magrittr %>%
 #' @importFrom raster rasterFromXYZ raster resample
 #' @importFrom sp spTransform proj4string
 #'

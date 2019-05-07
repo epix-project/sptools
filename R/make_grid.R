@@ -13,7 +13,6 @@
 #' @importFrom sp makegrid SpatialPointsDataFrame
 #' @importFrom rgeos gArea
 #' @importFrom stats setNames
-#' @importFrom magrittr %>%
 #'
 #' @export
 #'

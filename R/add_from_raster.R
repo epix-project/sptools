@@ -8,10 +8,8 @@
 #'
 #' @return A \code{SpatialPointsDataFrame} object.
 #'
-#' @importFrom magrittr %<>%
 #' @importFrom sp spTransform proj4string SpatialPointsDataFrame
 #' @importFrom raster extract
-#' @importFrom dplyr data_frame
 #'
 #' @export
 #'

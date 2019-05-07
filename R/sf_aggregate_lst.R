@@ -141,7 +141,6 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 #' range) are changed.
 #'
 #' @importFrom tidyr unnest
-#' @importFrom magrittr %>% %<>%
 #' @importFrom sf st_union st_cast st_join st_as_sf
 #' @importFrom stats na.omit
 #'
