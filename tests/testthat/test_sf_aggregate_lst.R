@@ -1,6 +1,7 @@
 library(magrittr)  # for "%>%"
 library(dictionary) # for "match_pattern", "XX_history", "XX_province",
 # "XX_district"
+library(dplyr)
 
 context("`sf_aggregate_lst`")
 
@@ -11,7 +12,7 @@ test_that("`sf_aggregate_lst` returns the correct output", {
   sf1 <- sptools::gadm("Cambodia", "sf", 1, intlib = FALSE, save = TRUE) %>%
     mutate(province = NAME_1 %>% stringi::stri_escape_unicode() %>%
              kh_province[.]) %>%
-    select(province, geometry)
+    dplyr::select(province, geometry)
   unlink(tmp, recursive = TRUE)
 
   test1a <- sf_aggregate_lst(sf1, kh_history, from = "1998-01-01")
@@ -31,7 +32,7 @@ test_that("`sf_aggregate_lst` returns the correct output", {
              la_province[.],
            district = NAME_2 %>% stringi::stri_escape_unicode() %>%
              la_district[.]) %>%
-    select(province, district, geometry)
+    dplyr::select(province, district, geometry)
   unlink(tmp, recursive = TRUE)
 
   test2a <- sf_aggregate_lst(sf2, la_history, from = "2008-01-01")
@@ -49,7 +50,7 @@ test_that("`sf_aggregate_lst` returns the correct output", {
   sf3 <- sptools::gadm("Thailand", "sf", 1, intlib = FALSE, save = TRUE) %>%
     mutate(province = NAME_1 %>% stringi::stri_escape_unicode() %>%
              th_province[.]) %>%
-    select(province, geometry)
+    dplyr::select(province, geometry)
   unlink(tmp, recursive = TRUE)
 
   test3 <- sf_aggregate_lst(sf3, th_history, from = "1980-01-01")
