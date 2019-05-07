@@ -15,7 +15,6 @@
 #' @export
 #'
 #' @examples
-#' library(magrittr)
 #' library(sf)
 #'
 #' # SpatialPolygonsDataFrame
@@ -51,10 +50,9 @@
 #' sp::plot(stations4, add = TRUE, col = "blue")
 #'
 #' # With the 5-km buffer zone:
-#' vn4 <- vn3 %>%
-#'   sp::spTransform(projVN) %>%
-#'   rgeos::gBuffer(width = 5000) %>%
-#'   sp::spTransform(crs(vn))
+#' vn4 <- sp::spTransform(vn3, projVN)
+#' vn4 <- rgeos::gBuffer(vn4, width = 5000)
+#' vn4 <- sp::spTransform(vn4, crs(vn))
 #'
 #' sp::plot(vn4, border = "green", add = TRUE)
 #' stations5 <- points_in_polygon(stations, vn4)

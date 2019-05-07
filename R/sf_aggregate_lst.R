@@ -66,7 +66,7 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
                            function(x) st_union(x, by_feature = TRUE))
       tmp$`TRUE` <- do.call(rbind, tmp$`TRUE`)
       # Update the new information in the general data frame
-      df <- rbind(tmp$`TRUE`, tmp$`FALSE`) #%>%
+      df <- rbind(tmp$`TRUE`, tmp$`FALSE`)
       df <- df[do.call(order, list(df[, col_name, drop = TRUE])), ]
       df <- st_cast(df, "MULTIPOLYGON")
     }

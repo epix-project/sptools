@@ -107,7 +107,9 @@ download_file <- function(file, alt_path, format, force) {
 #' kh <- gadm("Cambodia", "sf", 0)
 #'
 #' #' # to download Vietnam only in the working directory
+#' \dontrun{
 #' vn <- gadm("Vietnam", "sf", 0, intlib = FALSE, save = TRUE)
+#' }
 #'
 #' @export
 gadm <- function(country, format, level, intlib = TRUE, save = FALSE,

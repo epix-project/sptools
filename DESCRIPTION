@@ -29,13 +29,9 @@ Suggests:
 Imports: 
     maptools,
     rgeos, 
-    sp, 
-    magrittr, 
+    sp,
     countrycode,
     methods,
     sf,
-    rlang,
-    dplyr,
-    purrr,
     tidyr,
     raster

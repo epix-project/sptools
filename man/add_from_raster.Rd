@@ -21,29 +21,22 @@ Based on the \code{\link[raster]{extract}} function.
 }
 \examples{
 library(sp)
-library(magrittr) # for " \%>\% "
 
 # download vietnam country administrative map in the internal library and in
 # the working direction
 vn <- sptools::gadm("vietnam", "sp", 0, intlib = TRUE, save = TRUE)
 
 # With a SpatialPointsDataFrame
-value <- vn \%>\%
-  spsample(100, "random") \%>\%
-  SpatialPointsDataFrame(data.frame(variable = 1:100)) \%>\%
-  add_from_raster(srtmVN::getsrtm(), "elevation")
+value <- spsample(vn, 100, "random")
+value <- SpatialPointsDataFrame(value, data.frame(variable = 1:100))
+value <- add_from_raster(value, srtmVN::getsrtm(), "elevation")
 
-value \%>\%
-  slot("data") \%>\%
-  head()
+head(value@data)
 
 # With a SpatialPoints
-value <- vn \%>\%
-  spsample(100, "random") \%>\%
-  SpatialPoints(proj4string = vn@proj4string, bbox = vn@bbox) \%>\%
-  add_from_raster(srtmVN::getsrtm(), "elevation")
+value <- spsample(vn, 100, "random")
+value <- SpatialPoints(value, proj4string = vn@proj4string, bbox = vn@bbox)
+value <- add_from_raster(value, srtmVN::getsrtm(), "elevation")
 
-value \%>\%
-  slot("data") \%>\%
-  head()
+head(value@data)
 }
