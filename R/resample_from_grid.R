@@ -57,11 +57,11 @@ resample_from_grid <- function(rstr, grd) {
     raster(x, 1)
   }
 # the pipeline:
-  grd %>%
-    spTransform(crs) %>%
-    as.data.frame() %>%
-    move_xy() %>% # ordered required by rasterFromXYZ
-    rasterFromXYZ(crs = crs) %>%
-    layer_or_brick() %>%
-    resample(rstr, .)
+  grd <- spTransform(grd, crs)
+  grd <- as.data.frame(grd)
+  grd <- move_xy(grd) # ordered required by rasterFromXYZ
+  grd <- rasterFromXYZ(grd, crs = crs)
+  grd <- layer_or_brick(grd)
+  grd <- resample(rstr, grd)
+  grd
 }
