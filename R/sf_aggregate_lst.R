@@ -104,6 +104,7 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
                                          df[, col_name, drop = TRUE]))
       df <- df[, -which(names(df) %in% col_name)]
       names(df)[which(names(df) == "col_name")] <- col_name
+      df <- sf::st_as_sf(df)
     }
   }
   df <- df[do.call(order, list(df[, col_name, drop = TRUE])), ]
@@ -174,7 +175,3 @@ sf_aggregate_lst <- function(df_sf, history_lst, from, to = "2018-12-31") {
   df_agg <- df_agg[!duplicated(df_agg), ]
   df_agg <- st_cast(df_agg, "MULTIPOLYGON")
 }
-
-## quiets concerns of R CMD check for the values that appear in pipelines
-if (getRversion() >= "2.15.1")  utils::globalVariables(c("geometry", "new_var",
-                                                         "."))
