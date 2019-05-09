@@ -33,5 +33,4 @@ Imports:
     countrycode,
     methods,
     sf,
-    tidyr,
     raster

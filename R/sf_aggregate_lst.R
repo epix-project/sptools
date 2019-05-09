@@ -57,8 +57,7 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
       # calculate the new geometry and update the new spatial definition (name
       # and geometry) in the data frame selected
       tmp$`TRUE` <- tmp$`TRUE`[, -which(names(tmp$`TRUE`) %in% col_name)]
-      tmp$`TRUE` <- merge(tmp$`TRUE`, tidyr::unnest(event$d.before),
-                          by = col_name2)
+      tmp$`TRUE` <- merge(tmp$`TRUE`, event$d.before, by = col_name2)
       tmp$`TRUE` <- tmp$`TRUE`[, c(col_name, col_name2, "geometry")]
       tmp$`TRUE` <- sf::st_as_sf(tmp$`TRUE`)
       tmp$`TRUE` <- split(tmp$`TRUE`, tmp$`TRUE`[, col_name, drop = TRUE])
@@ -141,7 +140,6 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 #' and geometry that needed to be aggregated or renamed (according to the time
 #' range) are changed.
 #'
-#' @importFrom tidyr unnest
 #' @importFrom sf st_union st_cast st_join st_as_sf
 #' @importFrom stats na.omit
 #'
