@@ -39,7 +39,7 @@ select_events <- function(hist_lst, from, to) {
 #' \code{after}, a slot \code{before}, a slot{event} (split/merge/rename).
 #' @param col_name The name of the column containing the element to aggregates.
 #' @param col_name2 The name of the 2nd column containing the element to
-#' aggregates for complexe event, by default `NULL`.
+#' aggregates for complex event, by default `NULL`.
 #' @return A object of the same class as \code{df} in which all the provinces
 #' that needed to be merged (according to the time range) are merged.
 #' @keywords internal
@@ -50,8 +50,9 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
     # select one event
     event <- event_lst[[i]]
 
-    # For the complexe merge event
-    if (event$event == "complexe merge") {
+    # For the complex merge event
+    if (event$event %in% c("complex merge", "merge") &
+        any(grepl("d.bef|d.aft",names(event)))) {
       suppressWarnings(tmp <-  split(df, f = df[, col_name, drop = TRUE] %in%
                                        unlist(event$after)))
       # calculate the new geometry and update the new spatial definition (name
@@ -71,7 +72,7 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
     }
 
     # For the split event
-    if (event$event == "split" | event$event == "complexe split") {
+    if (event$event == "split" | event$event == "complex split") {
       # Split the data frame to select the province that we need to merge
       # together
       if (event$event == "split") {
@@ -126,10 +127,10 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 #'
 #' @param df_sf A sf data frame containing at least the variables
 #' \code{province}, \code{geometry} and \code{district} if `history_lst`
-#' contains complexe event
+#' contains complex event
 #' @param history_lst A list containing a list of event, each code with a slot
 #' \code{after}, a slot \code{before}, a slot{event} (split/merge/rename/
-#' complexe merge/complexe split) and a slot \code{year}.
+#' complex merge/complex split) and a slot \code{year}.
 #' @param from Initial date of the time range selected for the province
 #' definition, of the class \code{Date}, \code{character} or \code{numeric}.
 #' @param to Final date of the time range selected for the province
@@ -155,7 +156,7 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 sf_aggregate_lst <- function(df_sf, history_lst, from, to = "2018-12-31") {
 
   event_lst <- lapply(select_events(history_lst, from, to), "[", "event")
-  if (any(grepl("complexe", event_lst))) {
+  if (any(grepl("complex|merge", event_lst))) {
    sel <- c("province", "district")
    col_name <- "province"
    col_name2 <- "district"

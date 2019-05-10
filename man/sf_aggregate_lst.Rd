@@ -9,11 +9,11 @@ sf_aggregate_lst(df_sf, history_lst, from, to = "2018-12-31")
 \arguments{
 \item{df_sf}{A sf data frame containing at least the variables
 \code{province}, \code{geometry} and \code{district} if `history_lst`
-contains complexe event}
+contains complex event}
 
 \item{history_lst}{A list containing a list of event, each code with a slot
 \code{after}, a slot \code{before}, a slot{event} (split/merge/rename/
-complexe merge/complexe split) and a slot \code{year}.}
+complex merge/complex split) and a slot \code{year}.}
 
 \item{from}{Initial date of the time range selected for the province
 definition, of the class \code{Date}, \code{character} or \code{numeric}.}
