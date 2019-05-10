@@ -156,7 +156,9 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 sf_aggregate_lst <- function(df_sf, history_lst, from, to = "2018-12-31") {
 
   event_lst <- lapply(select_events(history_lst, from, to), "[", "event")
-  if (any(grepl("complex|merge", event_lst))) {
+  names_lst <- lapply(select_events(history_lst, from, to), names)
+  if (any(grepl("complex|merge", event_lst)) &
+      any(grepl("d.before", names_lst))) {
    sel <- c("province", "district")
    col_name <- "province"
    col_name2 <- "district"
