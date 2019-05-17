@@ -5,13 +5,10 @@ context("`sf_aggregate_lst`")
 
 test_that("`sf_aggregate_lst` returns the correct output", {
 
-  tmp <- file.path(tempdir())
-  dir.create(tmp)
   sf1 <- sptools::gadm("Cambodia", "sf", 1, intlib = FALSE, save = FALSE)
   sf1 <- transform(sf1, admin1 = translate(sf1$NAME_1 , kh_admin1))
   sf1 <- sf1[, c("admin1", "geometry")]
   sf1 <- sf::st_as_sf(sf1)
-  unlink(tmp, recursive = TRUE)
 
   test1a <- sf_aggregate_lst(sf1, kh_history, from = "1998-01-01")
   testthat::expect_equal(match_pattern(as.data.frame(test1a), "admin1",
@@ -29,16 +26,16 @@ test_that("`sf_aggregate_lst` returns the correct output", {
   sf2 <- sf::st_as_sf(sf2)
   test2a <- sf_aggregate_lst(sf2, la_history, from = "2008-01-01")
   testthat::expect_equal(match_pattern(as.data.frame(test2a), "admin1",
-                             la_admin1_year), "1997-2006")
+                             la_admin1_year), "2006-2013")
 
   test2b <- sf_aggregate_lst(sf2, la_history, from = "1998-01-01")
   testthat::expect_equal(match_pattern(as.data.frame(test2b), "admin1",
-                             la_admin1_year), "1997-2006")
+                             la_admin1_year), "2006-2013")
 
 
   sf3 <- sptools::gadm("Thailand", "sf", 1, intlib = FALSE, save = FALSE)
   sf3 <- transform(sf3, admin1 = translate(NAME_1 , th_admin1))
-  sf3 <- sf3[, c("province", "geometry")]
+  sf3 <- sf3[, c("admin1", "geometry")]
   sf3 <- sf::st_as_sf(sf3)
   test3 <- sf_aggregate_lst(sf3, th_history, from = "1980-01-01")
   testthat::expect_equal(match_pattern(as.data.frame(test3), "admin1",
