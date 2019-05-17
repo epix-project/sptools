@@ -79,10 +79,9 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
         suppressWarnings(tmp <-  split(df, f = df[, col_name, drop = TRUE] %in%
                                          unlist(event$after)))
       } else {
-        suppressWarnings(tmp <-  split(df, f = is.element(df[, col_name2] %>%
-                                                 unlist(),
-                                                 event$d.after$admin2 %>%
-                                                   unlist() %>% na.omit())))
+        suppressWarnings(tmp <-  split(df, f = is.element(
+          df[, col_name2, drop = TRUE],
+          na.omit(unlist(event$d.after$admin2)))))
       }
 
       # calculate the new geometry
