@@ -8,17 +8,17 @@ sf_aggregate_lst(df_sf, history_lst, from, to = "2018-12-31")
 }
 \arguments{
 \item{df_sf}{A sf data frame containing at least the variables
-\code{province}, \code{geometry} and \code{district} if `history_lst`
+\code{admin1}, \code{geometry} and \code{admin2} if `history_lst`
 contains complexe event}
 
 \item{history_lst}{A list containing a list of event, each code with a slot
 \code{after}, a slot \code{before}, a slot{event} (split/merge/rename/
 complexe merge/complexe split) and a slot \code{year}.}
 
-\item{from}{Initial date of the time range selected for the province
+\item{from}{Initial date of the time range selected for the admin1
 definition, of the class \code{Date}, \code{character} or \code{numeric}.}
 
-\item{to}{Final date of the time range selected for the province
+\item{to}{Final date of the time range selected for the admin1
 definition, of the class \code{Date}, \code{character} or \code{numeric}, by
 default  \code{"2018-12-31"}}
 }
@@ -41,11 +41,12 @@ For each `split event`, the geometry of the variables contained  in the slot
  `geometry`
 }
 \examples{
- # to have the list of split/merge/rename event for Vietnam
- vn_history <- dictionary::vn_history
+# to have the list of split/merge/rename event for Vietnam
+vn_history <- dictionary::vn_history
 
- vn_prov04 <- gadmVN::gadm(date = "2004-01-01")
- vn_prov70 <- sf_aggregate_lst(vn_prov04, vn_history, from = "1970",
-                               to = "2004")
+vn_prov04 <- gadmVN::gadm(date = "2004-01-01")
+names(vn_prov04)[1] <- "admin1"
+vn_prov70 <- sf_aggregate_lst(vn_prov04, vn_history, from = "1970",
+                              to = "2004")
 
 }
