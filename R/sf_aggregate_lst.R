@@ -33,14 +33,14 @@ select_events <- function(hist_lst, from, to) {
 #'  For each `rename event`, the variable contained in the slot `after` is
 #'  rename by the variable in the slot `before`.
 #'
-#' @param df A sf data frame containing at least the variables \code{province},
+#' @param df A sf data frame containing at least the variables \code{admin1},
 #' \code{geometry}.
 #' @param event_lst A list containing a list of event, each code with a slot
 #' \code{after}, a slot \code{before}, a slot{event} (split/merge/rename).
 #' @param col_name The name of the column containing the element to aggregates.
 #' @param col_name2 The name of the 2nd column containing the element to
-#' aggregates for complex event, by default `NULL`.
-#' @return A object of the same class as \code{df} in which all the provinces
+#' aggregates for complexe event, by default `NULL`.
+#' @return A object of the same class as \code{df} in which all the admin1 units
 #' that needed to be merged (according to the time range) are merged.
 #' @keywords internal
 #' @noRd
@@ -72,16 +72,17 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
     }
 
     # For the split event
-    if (event$event == "split" | event$event == "complex split") {
-      # Split the data frame to select the province that we need to merge
+    if (event$event == "split" | event$event == "complexe split") {
+      # Split the data frame to select the admin1 that we need to merge
       # together
       if (event$event == "split") {
         suppressWarnings(tmp <-  split(df, f = df[, col_name, drop = TRUE] %in%
                                          unlist(event$after)))
       } else {
-        suppressWarnings(tmp <-  split(df, f = is.element(
-          df[, col_name2, drop = TRUE],
-          na.omit(unlist(event$d.after$district)))))
+        suppressWarnings(tmp <-  split(df, f = is.element(df[, col_name2] %>%
+                                                 unlist(),
+                                                 event$d.after$admin2 %>%
+                                                   unlist() %>% na.omit())))
       }
 
       # calculate the new geometry
@@ -126,14 +127,14 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 #'  `geometry`
 #'
 #' @param df_sf A sf data frame containing at least the variables
-#' \code{province}, \code{geometry} and \code{district} if `history_lst`
-#' contains complex event
+#' \code{admin1}, \code{geometry} and \code{admin2} if `history_lst`
+#' contains complexe event
 #' @param history_lst A list containing a list of event, each code with a slot
 #' \code{after}, a slot \code{before}, a slot{event} (split/merge/rename/
-#' complex merge/complex split) and a slot \code{year}.
-#' @param from Initial date of the time range selected for the province
+#' complexe merge/complexe split) and a slot \code{year}.
+#' @param from Initial date of the time range selected for the admin1
 #' definition, of the class \code{Date}, \code{character} or \code{numeric}.
-#' @param to Final date of the time range selected for the province
+#' @param to Final date of the time range selected for the admin1
 #' definition, of the class \code{Date}, \code{character} or \code{numeric}, by
 #' default  \code{"2018-12-31"}
 #'
@@ -145,12 +146,13 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 #' @importFrom stats na.omit
 #'
 #' @examples
-#'  # to have the list of split/merge/rename event for Vietnam
-#'  vn_history <- dictionary::vn_history
+#' # to have the list of split/merge/rename event for Vietnam
+#' vn_history <- dictionary::vn_history
 #'
-#'  vn_prov04 <- gadmVN::gadm(date = "2004-01-01")
-#'  vn_prov70 <- sf_aggregate_lst(vn_prov04, vn_history, from = "1970",
-#'                                to = "2004")
+#' vn_prov04 <- gadmVN::gadm(date = "2004-01-01")
+#' names(vn_prov04)[1] <- "admin1"
+#' vn_prov70 <- sf_aggregate_lst(vn_prov04, vn_history, from = "1970",
+#'                               to = "2004")
 #'
 #' @export
 sf_aggregate_lst <- function(df_sf, history_lst, from, to = "2018-12-31") {
@@ -159,12 +161,12 @@ sf_aggregate_lst <- function(df_sf, history_lst, from, to = "2018-12-31") {
   names_lst <- lapply(select_events(history_lst, from, to), names)
   if (any(grepl("complex|merge", event_lst)) &
       any(grepl("d.before", names_lst))) {
-   sel <- c("province", "district")
-   col_name <- "province"
-   col_name2 <- "district"
+   sel <- c("admin1", "admin2")
+   col_name <- "admin1"
+   col_name2 <- "admin2"
   } else {
-    sel <- "province"
-    col_name <- "province"
+    sel <- "admin1"
+    col_name <- "admin1"
   }
 
   # Prepare the data frame
