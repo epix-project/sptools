@@ -6,13 +6,9 @@ context("`sf_aggregate_lst`")
 
 test_that("`sf_aggregate_lst` returns the correct output", {
 
-  tmp <- file.path(tempdir())
-  dir.create(tmp)
-  sf1 <- sptools::gadm("Cambodia", "sf", 1, intlib = FALSE, save = TRUE,
-                       path = tmp) %>%
+  sf1 <- sptools::gadm("Cambodia", "sf", 1, intlib = FALSE, save = FALSE) %>%
     dplyr::mutate(admin1 = translate(NAME_1 , kh_admin1)) %>%
     dplyr::select(admin1, geometry)
-  unlink(tmp, recursive = TRUE)
 
   test1a <- sf_aggregate_lst(sf1, kh_history, from = "1998-01-01")
   testthat::expect_equal(match_pattern(test1a %>% as.data.frame, "admin1",
@@ -24,14 +20,10 @@ test_that("`sf_aggregate_lst` returns the correct output", {
                              kh_admin1_year),
                "1994-1997")
 
-  tmp <- file.path(tempdir())
-  dir.create(tmp)
-  sf2 <- sptools::gadm("Laos", "sf", 2, intlib = FALSE, save = TRUE,
-                       path = tmp) %>%
+  sf2 <- sptools::gadm("Laos", "sf", 2, intlib = FALSE, save = FALSE) %>%
     dplyr::mutate(admin1 = translate(NAME_1 , la_admin1),
            admin2 = translate(NAME_2 , la_admin2)) %>%
     dplyr::select(admin1, admin2, geometry)
-  unlink(tmp, recursive = TRUE)
   test2a <- sf_aggregate_lst(sf2, la_history, from = "2008-01-01")
   testthat::expect_equal(match_pattern(test2a %>% as.data.frame, "admin1",
                              la_admin1_year),
@@ -42,13 +34,9 @@ test_that("`sf_aggregate_lst` returns the correct output", {
                              la_admin1_year),
                "1997-2006")
 
-  tmp <- file.path(tempdir())
-  dir.create(tmp)
-  sf3 <- sptools::gadm("Thailand", "sf", 1, intlib = FALSE, save = TRUE,
-                       path = tmp) %>%
+  sf3 <- sptools::gadm("Thailand", "sf", 1, intlib = FALSE, save = FALSE) %>%
     dplyr::mutate(admin1 = translate(NAME_1 , th_admin1)) %>%
     dplyr::select(admin1, geometry)
-  unlink(tmp, recursive = TRUE)
   test3 <- sf_aggregate_lst(sf3, th_history, from = "1980-01-01")
   testthat::expect_equal(match_pattern(test3 %>% as.data.frame, "admin1",
                              th_admin1_year),
