@@ -51,8 +51,9 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 
     # For the complexe merge event
     if (event$event == "complexe merge") {
-      suppressWarnings(tmp <-  split(df, f = df[, col_name] %>% unlist() %in%
-                                       event$after %>% unlist()))
+      suppressWarnings(tmp <-  split(df, f = df[, col_name, drop = TRUE] %>%
+                                       unlist() %in% event$after %>%
+                                       unlist()))
       # calculate the new geometry and update the new spatial definition (name
       # and geometry) in the data frame selected
       tmp$`TRUE` %<>%
@@ -74,13 +75,13 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
       # Split the data frame to select the admin1 that we need to merge
       # together
       if (event$event == "split") {
-        suppressWarnings(tmp <-  split(df, f = df[, col_name] %>% unlist() %in%
-                                         event$after %>% unlist()))
+        suppressWarnings(tmp <-  split(df, f = df[, col_name, drop = TRUE] %>%
+                                         unlist() %in% event$after %>%
+                                         unlist()))
       } else {
-        suppressWarnings(tmp <-  split(df, f = is.element(df[, col_name2] %>%
-                                                 unlist(),
-                                                 event$d.after$admin2 %>%
-                                                   unlist() %>% na.omit())))
+        suppressWarnings(tmp <-  split(df, f = is.element(
+          df[, col_name2, drop = TRUE] %>% unlist(),
+          event$d.after$admin2 %>% unlist() %>% na.omit())))
       }
 
       # calculate the new geometry
