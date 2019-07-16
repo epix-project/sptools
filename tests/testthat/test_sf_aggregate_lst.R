@@ -27,7 +27,7 @@ test_that("`sf_aggregate_lst` returns the correct output", {
   test2a <- sf_aggregate_lst(sf2, la_history, from = "2008-01-01")
   testthat::expect_equal(match_pattern(test2a %>% as.data.frame, "admin1",
                              la_admin1_year),
-               "1997-2006")
+               "2006-2013")
 
   test2b <- sf_aggregate_lst(sf2, la_history, from = "1998-01-01")
   testthat::expect_equal(match_pattern(test2b %>% as.data.frame, "admin1",
