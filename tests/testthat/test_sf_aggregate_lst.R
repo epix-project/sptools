@@ -31,7 +31,7 @@ test_that("`sf_aggregate_lst` returns the correct output", {
 
   test2b <- sf_aggregate_lst(sf2, la_history, from = "1998-01-01")
   testthat::expect_equal(match_pattern(as.data.frame(test2b), "admin1",
-                             la_admin1_year), "2006-2013")
+                             la_admin1_year), "1997-2006")
 
   sf3 <- sptools::gadm("Thailand", "sf", 1, intlib = FALSE, save = FALSE)
   sf3 <- transform(sf3, admin1 = translate(NAME_1 , th_admin1))
