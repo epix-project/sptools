@@ -2,9 +2,12 @@
 % Please edit documentation in R/cut_sppoly.R
 \name{cut_poly}
 \alias{cut_poly}
+\alias{cut_sppoly}
 \title{Cuts a Polygon object into 2 lines of which it returns the coordinates}
 \usage{
 cut_poly(poly, pt1, pt2)
+
+cut_sppoly(sppoly, pt1, pt2)
 }
 \arguments{
 \item{poly}{A Polygon object as defined the sp package.}
@@ -20,4 +23,14 @@ the first column is the longitude and the second column is the latitude.
 \description{
 The polygon is cut between the points of the polygon that are closest to pt1
 and pt2
+}
+\examples{
+library(sf)
+
+# SpatialPolygonsDataFrame
+vn <- sf::as_Spatial(gadmVN::gadm(level = "province"))
+# SpatialPoints
+stations <- as(imhen::stations, "Spatial")
+stations <- df2splist(as.data.frame(stations@coords))
+sptools:::cut_sppoly(vn, stations[[1]], stations[[2]])
 }

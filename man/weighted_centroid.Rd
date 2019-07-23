@@ -17,3 +17,12 @@ coordinates x,y of a point
 Calculate the coordinate of the weighted centroid from a Spatial Points Data
 Frame object
 }
+\examples{
+library(sf)
+
+# SpatialPoints
+stations <- as(imhen::stations, "Spatial")
+stations@data <- stations@data[, "latitude", drop = FALSE]
+weighted_centroid(stations)
+
+}

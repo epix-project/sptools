@@ -15,3 +15,10 @@ a list of single-point SpatialPoints
 \description{
 Transform a 2-variable dataframe into a list of single-point SpatialPoints.
 }
+\examples{
+library(sf)
+
+# SpatialPoints
+stations <- as(imhen::stations, "Spatial")
+df2splist(as.data.frame(stations@coords))
+}

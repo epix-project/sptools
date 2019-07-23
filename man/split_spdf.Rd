@@ -15,6 +15,15 @@ a list of SpatialPolygons*
 \description{
 Splits a SpatialPolygons* into a list of SpatialPolygons*
 }
+\examples{
+library(sf)
+
+# SpatialPolygonsDataFrame
+vn <- sf::as_Spatial(gadmVN::gadm(level = "country"))
+vn_lst <- split_spdf(vn)
+vn_lst
+
+}
 \author{
 Marc Choisy
 }

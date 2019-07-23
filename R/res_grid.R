@@ -13,7 +13,13 @@
 #' @importFrom utils head
 #'
 #' @export
-#'
+#' @examples
+#' library(sf)
+#' vn <- gadmVN::gadm(level = "country")
+#' vn <- sf::as_Spatial(vn)
+#' sp::plot(vn)
+#' grid <- make_grid(vn, 100)
+#' res_grid(grid)
 res_grid <- function(grdsppts) {
   grdsppts %>%
     coordinates() %>%

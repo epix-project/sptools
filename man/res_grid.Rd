@@ -14,6 +14,14 @@ res_grid(grdsppts)
 Equivalent to the `raster::res` function but for a grid `SpatialPoints`
 object as returned by `sp::makegrid` or `sptools::make_grid`.
 }
+\examples{
+library(sf)
+vn <- gadmVN::gadm(level = "country")
+vn <- sf::as_Spatial(vn)
+sp::plot(vn)
+grid <- make_grid(vn, 100)
+res_grid(grid)
+}
 \author{
 Marc Choisy
 }

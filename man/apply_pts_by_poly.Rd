@@ -23,6 +23,18 @@ This function is a wrapper aroud the `sptools::points_in_polygon` and applies
 a function `f` to the variable `var` of the `spatialPointsDataFrame` `points`
 object, by the polygons of `spatialPolygonsDataFrame` `polygons` object.
 }
+\examples{
+library(sf)
+
+# SpatialPolygonsDataFrame
+vn <- sf::as_Spatial(gadmVN::gadm(level = "province"))
+# SpatialPoints
+stations <- as(imhen::stations, "Spatial")
+names(stations)
+
+# to calculate the mean elevation of the station for each polygon
+apply_pts_by_poly(stations, vn, "elevation", mean)
+}
 \author{
 Marc Choisy
 }

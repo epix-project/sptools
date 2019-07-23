@@ -2,6 +2,13 @@
 #' @param df a 2-variable dataframe
 #' @importFrom sp SpatialPoints
 #' @return a list of single-point SpatialPoints
+#' @export
+#' @examples
+#' library(sf)
+#'
+#' # SpatialPoints
+#' stations <- as(imhen::stations, "Spatial")
+#' df2splist(as.data.frame(stations@coords))
 df2splist <- function(df) {
   lapply(split(df, 1:nrow(df)), SpatialPoints)
 }
@@ -40,6 +47,17 @@ cut_poly <- function(poly, pt1, pt2) {
 
 #' @importFrom sp Line Lines SpatialLines
 #' @importFrom methods slot
+#' @rdname cut_poly
+#' @export
+#' @examples
+#' library(sf)
+#'
+#' # SpatialPolygonsDataFrame
+#' vn <- sf::as_Spatial(gadmVN::gadm(level = "province"))
+#' # SpatialPoints
+#' stations <- as(imhen::stations, "Spatial")
+#' stations <- df2splist(as.data.frame(stations@coords))
+#' sptools:::cut_sppoly(vn, stations[[1]], stations[[2]])
 cut_sppoly <- function(sppoly, pt1, pt2) {
 
   f1 <- function(x, pt1, pt2) lapply(x, cut_poly, pt1, pt2)

@@ -24,12 +24,25 @@ a \code{RasterStack} object, it resamples only the first layer and returns it
 as a \code{RasterLayer} object.
 }
 \examples{
-\dontrun{
 library(sp)
 library(raster)
+
+vn <- gadmVN::gadm(level = "country")
+vn <- sf::as_Spatial(vn)
+# The raster of population
+r <- raster(ncol = 5, nrow = 2)
+# A grid of 100 points over the country:
+proj <- proj4string(vn)
+grid5 <- vn \%>\%
+  makegrid(5) \%>\%
+  SpatialPoints(CRS(proj))
+# Let's resample:
+resample_from_grid(r, grid5)
+# Also works for RasterBrick
+resample_from_grid(brick(r), grid5)
+
+\dontrun{
 library(wordlpopVN)
-
-
 # # download vietnam country administrative map in the internal library and in
 # the working direction
 vn <- sptools::gadm("vietnam", "sf", 0, intlib = TRUE, save = TRUE)

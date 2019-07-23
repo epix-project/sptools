@@ -11,6 +11,14 @@
 #' @importFrom sp coordinates
 #' @importFrom magrittr %>%
 #' @export
+#' @examples
+#' library(sf)
+#'
+#' # SpatialPoints
+#' stations <- as(imhen::stations, "Spatial")
+#' stations@data <- stations@data[, "latitude", drop = FALSE]
+#' weighted_centroid(stations)
+#'
 weighted_centroid <- function(spdt) {
   weights <- spdt %>% # step 1
     slot("data") %>% {. / sum(.)}
