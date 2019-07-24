@@ -29,9 +29,8 @@
 #' r <- raster(ncol = 5, nrow = 2)
 #' # A grid of 100 points over the country:
 #' proj <- proj4string(vn)
-#' grid5 <- vn %>%
-#'   makegrid(5) %>%
-#'   SpatialPoints(CRS(proj))
+#' grid5 <- makegrid(vn, 5)
+#' grid5 <- SpatialPoints(grid5, CRS(proj))
 #' # Let's resample:
 #' resample_from_grid(r, grid5)
 #' # Also works for RasterBrick

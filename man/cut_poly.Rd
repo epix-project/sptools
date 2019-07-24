@@ -15,6 +15,8 @@ cut_sppoly(sppoly, pt1, pt2)
 \item{pt1}{A single-point SpatialPoint object as defined in the sp package.}
 
 \item{pt2}{A single-point SpatialPoint object as defined in the sp package.}
+
+\item{sppoly}{A Polygon object as defined the sp package.}
 }
 \value{
 a list of 2 2-variable data frames of coordinates. In each data frame

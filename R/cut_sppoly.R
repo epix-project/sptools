@@ -48,6 +48,7 @@ cut_poly <- function(poly, pt1, pt2) {
 #' @importFrom sp Line Lines SpatialLines
 #' @importFrom methods slot
 #' @rdname cut_poly
+#' @param sppoly A Polygon object as defined the sp package.
 #' @export
 #' @examples
 #' library(sf)
