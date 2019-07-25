@@ -58,7 +58,7 @@ cut_poly <- function(poly, pt1, pt2) {
 #' # SpatialPoints
 #' stations <- as(imhen::stations, "Spatial")
 #' stations <- df2splist(as.data.frame(stations@coords))
-#' sptools:::cut_sppoly(vn, stations[[1]], stations[[2]])
+#' cut_sppoly(vn, stations[[1]], stations[[2]])
 cut_sppoly <- function(sppoly, pt1, pt2) {
 
   f1 <- function(x, pt1, pt2) lapply(x, cut_poly, pt1, pt2)

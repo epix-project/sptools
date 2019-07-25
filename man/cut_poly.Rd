@@ -34,5 +34,5 @@ vn <- sf::as_Spatial(gadmVN::gadm(level = "province"))
 # SpatialPoints
 stations <- as(imhen::stations, "Spatial")
 stations <- df2splist(as.data.frame(stations@coords))
-sptools:::cut_sppoly(vn, stations[[1]], stations[[2]])
+cut_sppoly(vn, stations[[1]], stations[[2]])
 }
