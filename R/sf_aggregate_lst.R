@@ -18,7 +18,8 @@ select_events <- function(hist_lst, from, to) {
   sel0 <- sel0 > as.Date(paste0(from, "-01-01")) &
     sel0 <= as.Date(paste0(to, "-12-31"))
   event_lst <- hist_lst[sel0]
-  event_lst[order(sapply(event_lst, "[[", "year"), decreasing = TRUE)]
+  event_lst[order(unlist(lapply(event_lst, "[[", "year")),
+                  decreasing = TRUE)]
 }
 
 ################################################################################
@@ -174,6 +175,8 @@ sf_aggregate_lst <- function(df_sf, history_lst, from, to = "2018-12-31") {
   event_lst <- select_events(history_lst, from = from, to = to)
   # Merges back or renames variable(s) together (combine geometry)
   df_agg <- aggregate_sf(df, event_lst, col_name, col_name2 = col_name2)
-  df_agg <- df_agg[!duplicated(df_agg), ]
+  df_agg <- df_agg[!duplicated(as.data.frame(df_agg)), ]
+  df_agg$admin1 <- as.character(df_agg$admin1)
+  df_agg <- df_agg[order(df_agg$admin1), ]
   df_agg <- st_cast(df_agg, "MULTIPOLYGON")
 }
