@@ -9,8 +9,8 @@
                            checkPolygonsHoles(x)
                            },
                          sppoly@polygons,
-                         sapply(surfaces, which.max),
-                         sapply(surfaces, max))
+                         vapply(surfaces, which.max, 0),
+                         vapply(surfaces, max, 0))
   sppoly
 }
 

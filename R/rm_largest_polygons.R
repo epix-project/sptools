@@ -1,7 +1,7 @@
 # internal function: it works on a whole SpatialPolygon* object, not subset possible
 #' @importFrom maptools checkPolygonsHoles
 .rm_largest_polygons <- function(sppoly) {
-  sel <- which(sapply(sppoly@polygons, function(x) length(x@Polygons)) > 1)
+  sel <- which(vapply(sppoly@polygons, function(x) length(x@Polygons), 0) > 1)
   surfaces <- areas(sppoly)[sel]
   sppoly@polygons[sel] <- Map(function(x, y, z) {
     x@Polygons <- x@Polygons[-y] # remove largest
@@ -10,8 +10,8 @@
     checkPolygonsHoles(x)
     },
     sppoly@polygons[sel],
-    sapply(surfaces, which.max),
-    sapply(surfaces, function(x) sum(x) - max(x)))
+    vapply(surfaces, which.max, 0),
+    vapply(surfaces, function(x) sum(x) - max(x), 0))
   sppoly
 }
 

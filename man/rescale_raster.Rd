@@ -17,7 +17,7 @@ This function rescales the values of a raster between 0 and 1 so that they
 sum to 1. These values can then be used as weights.
 }
 \examples{
-
+library(raster)
 library(worldpopVN)
 provinces <- sptools::gadm("vietnam", "sp", 1, intlib = FALSE, save = TRUE)
 ppp2010 <- worldpopVN::getpop(2010)
