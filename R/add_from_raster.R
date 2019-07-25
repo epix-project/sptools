@@ -46,6 +46,9 @@ add_from_raster <- function(sptsdf, rstr, varname = "new_data") {
 # Note that we chose to project the SpatialPointsDataFrame instead of the
 # RasterLayer because it is much quicker this way.
   proj0 <- proj4string(sptsdf)
+  # test if object superpose
+  overlap <- try(raster::intersect(rstr, sptsdf), silent = TRUE)
+  if (class(overlap) == "try-error") stop("objects extents do not overlap")
   sptsdf %<>% spTransform(proj4string(rstr))
   if (class(sptsdf) == "SpatialPoints") {
     sptsdf <- SpatialPointsDataFrame(sptsdf@coords,
