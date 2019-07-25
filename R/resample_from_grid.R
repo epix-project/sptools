@@ -38,9 +38,10 @@
 #'
 #' \dontrun{
 #' library(wordlpopVN)
-#' # # download vietnam country administrative map in the internal library and in
+#' library(magrittr)
+#' # download vietnam country administrative map in the internal library and in
 #' # the working direction
-#' vn <- sptools::gadm("vietnam", "sf", 0, intlib = TRUE, save = TRUE)
+#' country <- sptools::gadm("vietnam", "sf", 0, intlib = TRUE, save = TRUE)
 #' # The raster of population
 #' ppp2010 <- worldpopVN::getpop(2010)
 #'
