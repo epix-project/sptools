@@ -10,6 +10,14 @@
 #'
 #' @importFrom sp coordinates
 #' @export
+#' @examples
+#' library(sf)
+#'
+#' # SpatialPoints
+#' stations <- as(imhen::stations, "Spatial")
+#' stations@data <- stations@data[, "latitude", drop = FALSE]
+#' weighted_centroid(stations)
+#'
 weighted_centroid <- function(spdt) {
   weights <- slot(spdt, "data")
   weights <- weights / sum(weights)

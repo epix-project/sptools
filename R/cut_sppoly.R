@@ -2,6 +2,13 @@
 #' @param df a 2-variable dataframe
 #' @importFrom sp SpatialPoints
 #' @return a list of single-point SpatialPoints
+#' @export
+#' @examples
+#' library(sf)
+#'
+#' # SpatialPoints
+#' stations <- as(imhen::stations, "Spatial")
+#' df2splist(as.data.frame(stations@coords))
 df2splist <- function(df) {
   lapply(split(df, seq_len(nrow(df))), SpatialPoints)
 }
@@ -27,6 +34,7 @@ dist_pt_poly <- function(pt, poly_coord_df) {
 #' @param pt2 A single-point SpatialPoint object as defined in the sp package.
 #' @return a list of 2 2-variable data frames of coordinates. In each data frame
 #' the first column is the longitude and the second column is the latitude.
+#' @noRd
 cut_poly <- function(poly, pt1, pt2) {
   poly_coord_df <- as.data.frame(poly@coords)
 # finds the points of the polygon that are closest to pt1 and pt2:
@@ -38,6 +46,25 @@ cut_poly <- function(poly, pt1, pt2) {
              poly_coord_df[1:points[1], ]))
 }
 
+#' Cuts Polygons object into 2 lines of which it returns the coordinates
+#'
+#' Each polygon is cut between the points of the polygons that are closest to
+#' pt1 and pt2
+#'
+#' @param sppoly A Polygon object as defined the sp package.
+#' @param pt1 A single-point SpatialPoint object as defined in the sp package.
+#' @param pt2 A single-point SpatialPoint object as defined in the sp package.
+#' @export
+#' @examples
+#' library(sf)
+#'
+#' # SpatialPolygonsDataFrame
+#' vn <- sf::as_Spatial(gadmVN::gadm(level = "province"))
+#' # SpatialPoints
+#' stations <- as(imhen::stations, "Spatial")
+#' stations <- df2splist(as.data.frame(stations@coords))
+#' cut_sppoly(vn, stations[[1]], stations[[2]])
+#'
 #' @importFrom sp Line Lines SpatialLines
 #' @importFrom methods slot
 cut_sppoly <- function(sppoly, pt1, pt2) {

@@ -15,6 +15,17 @@
 #'
 #' @export
 #'
+#' @examples
+#' library(sf)
+#'
+#' # SpatialPolygonsDataFrame
+#' vn <- sf::as_Spatial(gadmVN::gadm(level = "province"))
+#' # SpatialPoints
+#' stations <- as(imhen::stations, "Spatial")
+#' names(stations)
+#'
+#' # to calculate the mean elevation of the station for each polygon
+#' apply_pts_by_poly(stations, vn, "elevation", mean)
 apply_pts_by_poly <- function(points, polygons, var, f, ...) {
   unlist(lapply(seq_along(polygons),
                 function(x) f(

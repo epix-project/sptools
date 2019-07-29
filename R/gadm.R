@@ -133,7 +133,7 @@ gadm <- function(country, format, level, intlib = TRUE, save = FALSE,
   if (is.null(save)) {
     message(cat("\n Do you want to save ", file, " in another location",
                 " (yes/ no (default)) \n"))
-    ans <- readline("Selection: ")
+    ans <- readline("Selection: ") #nocov start
     if (ans == "yes") {
       message(cat("\n Can you provides the path to the location? \n",
                   "By default, working direction"))
@@ -143,7 +143,7 @@ gadm <- function(country, format, level, intlib = TRUE, save = FALSE,
       } else {
         path <- ans2
         if (!dir.exists(path)) dir.create(path, showWarnings = FALSE)
-      }
+      } #nocov end
     }
     if (ans %in% c("no", "")) {
       tmp <- paste0(tempdir(), "/")
@@ -179,7 +179,7 @@ gadm <- function(country, format, level, intlib = TRUE, save = FALSE,
                 " in your internal library?", "  (yes (default) / no)? \n"))
     ans <- readline("Selection: ")
     if (ans == "no") {
-      intlib <- FALSE
+      intlib <- FALSE #nocov
     }
   }
 

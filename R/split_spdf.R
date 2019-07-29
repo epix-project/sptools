@@ -6,6 +6,14 @@
 #'
 #' @author Marc Choisy
 #'
+#' @examples
+#' library(sf)
+#'
+#' # SpatialPolygonsDataFrame
+#' vn <- sf::as_Spatial(gadmVN::gadm(level = "country"))
+#' vn_lst <- split_spdf(vn)
+#' vn_lst
+#'
 #' @export
 #'
 split_spdf <- function(spdf) {
