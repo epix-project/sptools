@@ -61,6 +61,10 @@
 #' plot(st_geometry(st_as_sf(vn)), add = TRUE)
 #' }
 resample_from_grid <- function(rstr, grd) {
+# test if object superpose
+  overlap <- try(raster::intersect(rstr, grd), silent = TRUE)
+  if (class(overlap) == "try-error") stop("objects extents do not overlap")
+# projection
   crs <- proj4string(rstr)
 # this function manages RasterLayer or Bricks (or Stack)
   layer_or_brick <- function(x) {
