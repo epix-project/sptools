@@ -12,8 +12,8 @@ Authors@R: c(person("Marc", "Choisy",
                     comment = c(ORCID = "https://orcid.org/0000-0001-5797-1279")))
 Description: A collection of functions to extend the packages sp and rgeos.
 License: MIT + file LICENSE
-URL: https://github.com/choisy/sptools
-BugReports: https://github.com/choisy/sptools/issues
+URL: https://github.com/epix-project/sptools
+BugReports: https://github.com/epix-project/sptools/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
