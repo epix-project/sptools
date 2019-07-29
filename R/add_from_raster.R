@@ -8,53 +8,45 @@
 #'
 #' @return A \code{SpatialPointsDataFrame} object.
 #'
-#' @importFrom magrittr %<>%
 #' @importFrom sp spTransform proj4string SpatialPointsDataFrame
 #' @importFrom raster extract
-#' @importFrom dplyr data_frame
 #'
 #' @export
 #'
 #' @examples
 #' library(sp)
-#' library(magrittr) # for " %>% "
 #'
 #' # download vietnam country administrative map in the internal library and in
 #' # the working direction
 #' vn <- sptools::gadm("vietnam", "sp", 0, intlib = TRUE, save = TRUE)
 #'
 #' # With a SpatialPointsDataFrame
-#' value <- vn %>%
-#'   spsample(100, "random") %>%
-#'   SpatialPointsDataFrame(data.frame(variable = 1:100)) %>%
-#'   add_from_raster(srtmVN::getsrtm(), "elevation")
+#' value <- spsample(vn, 100, "random")
+#' value <- SpatialPointsDataFrame(value, data.frame(variable = 1:100))
+#' value <- add_from_raster(value, srtmVN::getsrtm(), "elevation")
 #'
-#' value %>%
-#'   slot("data") %>%
-#'   head()
+#' head(value@data)
 #'
 #' # With a SpatialPoints
-#' value <- vn %>%
-#'   spsample(100, "random") %>%
-#'   SpatialPoints(proj4string = vn@proj4string, bbox = vn@bbox) %>%
-#'   add_from_raster(srtmVN::getsrtm(), "elevation")
+#' value <- spsample(vn, 100, "random")
+#' value <- SpatialPoints(value, proj4string = vn@proj4string, bbox = vn@bbox)
+#' value <- add_from_raster(value, srtmVN::getsrtm(), "elevation")
 #'
-#' value %>%
-#'   slot("data") %>%
-#'   head()
+#' head(value@data)
 add_from_raster <- function(sptsdf, rstr, varname = "new_data") {
 # Note that we chose to project the SpatialPointsDataFrame instead of the
 # RasterLayer because it is much quicker this way.
   proj0 <- proj4string(sptsdf)
-  sptsdf %<>% spTransform(proj4string(rstr))
+  sptsdf <- spTransform(sptsdf, proj4string(rstr))
   if (class(sptsdf) == "SpatialPoints") {
+    df <- data.frame(varname = raster::extract(rstr, sptsdf))
+    names(df)[which(names(df) == "varname")] <- varname
     sptsdf <- SpatialPointsDataFrame(sptsdf@coords,
-                                     data_frame(!!varname :=
-                                                raster::extract(rstr, sptsdf)),
+                                     df,
                                      proj4string = sptsdf@proj4string)
   } else {
     sptsdf[[varname]] <- raster::extract(rstr, sptsdf)
   }
-  sptsdf %<>% spTransform(proj0)
+  sptsdf <- spTransform(sptsdf, proj0)
   sptsdf
 }

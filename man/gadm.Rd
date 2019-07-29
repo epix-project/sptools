@@ -89,7 +89,9 @@ to download and path to saved sp or sf file format from GADM:
 kh <- gadm("Cambodia", "sf", 0)
 
 #' # to download Vietnam only in the working directory
+\dontrun{
 vn <- gadm("Vietnam", "sf", 0, intlib = FALSE, save = TRUE)
+}
 
 }
 \author{

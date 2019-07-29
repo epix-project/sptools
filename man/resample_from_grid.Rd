@@ -39,9 +39,8 @@ ppp2010 <- worldpopVN::getpop(2010)
 
 # A grid of 100 points over the country:
 proj <- proj4string(country)
-grid100 <- country \%>\%
-  makegrid(100) \%>\%
-  SpatialPoints(CRS(proj))
+grid100 <- makegrid(country, 100)
+grid100 <- SpatialPoints(grid100, CRS(proj))
 
 # Let's resample:
 ppp2010rspld <- resample_from_grid(ppp2010, grid100)

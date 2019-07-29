@@ -13,7 +13,6 @@
 #'
 #' @return A \code{RasterLayer} object.
 #'
-#' @importFrom magrittr %>%
 #' @importFrom raster rasterFromXYZ raster resample
 #' @importFrom sp spTransform proj4string
 #'
@@ -35,9 +34,8 @@
 #'
 #' # A grid of 100 points over the country:
 #' proj <- proj4string(country)
-#' grid100 <- country %>%
-#'   makegrid(100) %>%
-#'   SpatialPoints(CRS(proj))
+#' grid100 <- makegrid(country, 100)
+#' grid100 <- SpatialPoints(grid100, CRS(proj))
 #'
 #' # Let's resample:
 #' ppp2010rspld <- resample_from_grid(ppp2010, grid100)
@@ -58,11 +56,11 @@ resample_from_grid <- function(rstr, grd) {
     raster(x, 1)
   }
 # the pipeline:
-  grd %>%
-    spTransform(crs) %>%
-    as.data.frame() %>%
-    move_xy() %>% # ordered required by rasterFromXYZ
-    rasterFromXYZ(crs = crs) %>%
-    layer_or_brick() %>%
-    resample(rstr, .)
+  grd <- spTransform(grd, crs)
+  grd <- as.data.frame(grd)
+  grd <- move_xy(grd) # ordered required by rasterFromXYZ
+  grd <- rasterFromXYZ(grd, crs = crs)
+  grd <- layer_or_brick(grd)
+  grd <- resample(rstr, grd)
+  grd
 }

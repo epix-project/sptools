@@ -13,7 +13,6 @@
 #' @importFrom sp makegrid SpatialPointsDataFrame
 #' @importFrom rgeos gArea
 #' @importFrom stats setNames
-#' @importFrom magrittr %>%
 #'
 #' @export
 #'
@@ -34,7 +33,8 @@ make_grid <- function(sppoly, n, ...) {
     n <- n * do.call(`*`, as.list(apply(sppoly@bbox, 1, diff))) /
       suppressWarnings(gArea(sppoly))
   }
-  makegrid(sppoly, n, ...) %>%
-    SpatialPoints(crs(sppoly)) %>%
-    points_in_polygon(sppoly)
+  grid <- makegrid(sppoly, n, ...)
+  grid <- SpatialPoints(grid, crs(sppoly))
+  grid <- points_in_polygon(grid, sppoly)
+  grid
 }
