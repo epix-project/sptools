@@ -8,23 +8,22 @@
 #' @export
 #'
 #' @examples
-#' library(magrittr)
 #'
 #' # download vietnam admin1 administrative map in the internal library and in
 #' # the working direction
 #' vn <- sptools::gadm("vietnam", "sp", 1, intlib = TRUE, save = TRUE)
 #' vn
-#' vn %<>% add_variable_spdf(rnorm(63))
+#' vn <- add_variable_spdf(vn, rnorm(63))
 #' vn
 #'
 #' # The name of the new variable will be "df". To prevent that we could choose
 #' # the data frame format:
-#' vn %<>% add_variable_spdf(data.frame(normal = rnorm(63)))
+#' vn <- add_variable_spdf(vn, data.frame(normal = rnorm(63)))
 #' vn
 #'
 #' # The data frame format allows the additional possibility to add several
 #' # additional variables all at once:
-#' vn %<>% add_variable_spdf(
+#' vn <-  add_variable_spdf(vn,
 #'   data.frame(uniform = runif(63), exponential = rexp(63)))
 #' vn
 add_variable_spdf <- function(spdf, df) {
@@ -78,10 +77,9 @@ add_variable_sp <- function(sp, df) {
 #' @importFrom sp SpatialPointsDataFrame
 #'
 #' @examples
-#' library(magrittr)
-#' stations <- imhen::stations %>%
-#'   sf::as_Spatial() %>%
-#'   remove_data_spatialpoints()
+#' stations <- imhen::stations
+#' stations <- sf::as_Spatial(stations)
+#' stations <- remove_data_spatialpoints(stations)
 #' stations
 #' add_variable_spts(stations, 1:length(stations))
 #' @export

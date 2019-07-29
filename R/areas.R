@@ -28,5 +28,5 @@
 #' cbind(rgeos::gArea(vn_prov, TRUE), sapply(poly_areas, sum))
 #'
 areas <- function(sppoly) {
-  lapply(sppoly@polygons, function(x) sapply(x@Polygons, function(x) x@area))
+  lapply(sppoly@polygons, function(x) vapply(x@Polygons, function(x) x@area, 0))
 }

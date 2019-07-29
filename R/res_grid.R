@@ -8,7 +8,6 @@
 #'
 #' @author Marc Choisy
 #'
-#' @importFrom magrittr %>%
 #' @importFrom sp coordinates
 #' @importFrom utils head
 #'
@@ -21,16 +20,16 @@
 #' grid <- make_grid(vn, 100)
 #' res_grid(grid)
 res_grid <- function(grdsppts) {
-  grdsppts %>%
-    coordinates() %>%
-    data.frame() %>%
-    lapply(diff) %>%
-    lapply(function(x) x[x > 0]) %>%
-    unlist() %>%
-    round(2) %>%
-    table() %>%
-    sort(decreasing = TRUE) %>%
-    head(1) %>%
-    names() %>%
-    as.numeric()
+  grdsppts <- coordinates(grdsppts)
+  grdsppts <- data.frame(grdsppts)
+  grdsppts <- lapply(grdsppts, diff)
+  grdsppts <- lapply(grdsppts, function(x) x[x > 0])
+  grdsppts <- unlist(grdsppts)
+  grdsppts <- round(grdsppts, 2)
+  grdsppts <- table(grdsppts)
+  grdsppts <- sort(grdsppts, decreasing = TRUE)
+  grdsppts <- head(grdsppts, 1)
+  grdsppts <- names(grdsppts)
+  grdsppts <- as.numeric(grdsppts)
+  grdsppts
 }

@@ -18,23 +18,22 @@ An object of the same class than \code{sp}.
 Adds variable(s) to a Spatial*DataFrame
 }
 \examples{
-library(magrittr)
 
 # download vietnam admin1 administrative map in the internal library and in
 # the working direction
 vn <- sptools::gadm("vietnam", "sp", 1, intlib = TRUE, save = TRUE)
 vn
-vn \%<>\% add_variable_spdf(rnorm(63))
+vn <- add_variable_spdf(vn, rnorm(63))
 vn
 
 # The name of the new variable will be "df". To prevent that we could choose
 # the data frame format:
-vn \%<>\% add_variable_spdf(data.frame(normal = rnorm(63)))
+vn <- add_variable_spdf(vn, data.frame(normal = rnorm(63)))
 vn
 
 # The data frame format allows the additional possibility to add several
 # additional variables all at once:
-vn \%<>\% add_variable_spdf(
+vn <-  add_variable_spdf(vn,
   data.frame(uniform = runif(63), exponential = rexp(63)))
 vn
 }

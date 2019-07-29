@@ -10,7 +10,7 @@
 #' stations <- as(imhen::stations, "Spatial")
 #' df2splist(as.data.frame(stations@coords))
 df2splist <- function(df) {
-  lapply(split(df, 1:nrow(df)), SpatialPoints)
+  lapply(split(df, seq_len(nrow(df))), SpatialPoints)
 }
 
 
@@ -21,7 +21,7 @@ df2splist <- function(df) {
 #' longitude and the second column being the latitude.
 #' @importFrom rgeos gDistance
 dist_pt_poly <- function(pt, poly_coord_df) {
-  sapply(df2splist(poly_coord_df), gDistance, pt)
+  vapply(df2splist(poly_coord_df), gDistance, 0, pt)
 }
 
 
@@ -37,8 +37,8 @@ dist_pt_poly <- function(pt, poly_coord_df) {
 cut_poly <- function(poly, pt1, pt2) {
   poly_coord_df <- as.data.frame(poly@coords)
 # finds the points of the polygon that are closest to pt1 and pt2:
-  points <- sort(sapply(lapply(list(pt1, pt2),
-                               dist_pt_poly, poly_coord_df), which.min))
+  points <- sort(unlist(lapply(lapply(list(pt1, pt2), dist_pt_poly,
+                                      poly_coord_df), which.min)))
 # cuts the polygon between these two points are return output in a list:
   list(poly_coord_df[points[1]:points[2], ],
        rbind(poly_coord_df[points[2]:nrow(poly_coord_df), ],
@@ -69,6 +69,6 @@ cut_sppoly <- function(sppoly, pt1, pt2) {
   out <- lapply(1:2, third_level, f2(sppoly@polygons, pt1, pt2))
   out <- lapply(out, lapply, lapply, Line)
   out <- lapply(out, function(x) Map(Lines, x,
-                                     sapply(sppoly@polygons, slot, "ID")))
+                                     vapply(sppoly@polygons, slot, "", "ID")))
   lapply(out, SpatialLines, crs(sppoly))
 }

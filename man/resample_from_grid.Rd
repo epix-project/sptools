@@ -42,7 +42,6 @@ resample_from_grid(brick(r), grid5)
 
 \dontrun{
 library(worldpopVN)
-library(magrittr)
 library(sf)
 # download vietnam country administrative map in the internal library and in
 # the working direction
@@ -51,10 +50,9 @@ country <- sptools::gadm("vietnam", "sf", 0, intlib = TRUE, save = TRUE)
 ppp2010 <- worldpopVN::getpop(2010)
 
 # A grid of 100 points over the country:
-proj <- proj4string(vn)
-grid100 <- vn \%>\%
-  makegrid(100) \%>\%
-  SpatialPoints(CRS(proj))
+proj <- proj4string(country)
+grid100 <- makegrid(country, 100)
+grid100 <- SpatialPoints(grid100, CRS(proj))
 
 # Let's resample:
 ppp2010rspld <- resample_from_grid(ppp2010, grid100)

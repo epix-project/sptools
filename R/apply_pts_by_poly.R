@@ -27,6 +27,7 @@
 #' # to calculate the mean elevation of the station for each polygon
 #' apply_pts_by_poly(stations, vn, "elevation", mean)
 apply_pts_by_poly <- function(points, polygons, var, f, ...) {
-  sapply(seq_along(polygons),
-         function(x) f(points_in_polygon(points, polygons[x, ])[[var]], ...))
+  unlist(lapply(seq_along(polygons),
+                function(x) f(
+                  points_in_polygon(points, polygons[x, ])[[var]], ...)))
 }

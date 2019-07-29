@@ -24,7 +24,7 @@
 #' vn
 #' remove_var(vn, c(6, 9))
 remove_var <- function(spdf, var = NULL) {
-  if (is.null(var)) var <- 1:ncol(spdf@data)
+  if (is.null(var)) var <- seq_len(ncol(spdf@data))
   spdf@data[, var] <- NULL
   spdf
 }

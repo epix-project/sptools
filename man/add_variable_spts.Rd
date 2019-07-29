@@ -18,10 +18,9 @@ A SpatialPointsDataFrame
 Adds variable(s) to a SpatialPoints
 }
 \examples{
-library(magrittr)
-stations <- imhen::stations \%>\%
-  sf::as_Spatial() \%>\%
-  remove_data_spatialpoints()
+stations <- imhen::stations
+stations <- sf::as_Spatial(stations)
+stations <- remove_data_spatialpoints(stations)
 stations
 add_variable_spts(stations, 1:length(stations))
 }
