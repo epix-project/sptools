@@ -107,7 +107,9 @@ download_file <- function(file, alt_path, format, force) {
 #' kh <- gadm("Cambodia", "sf", 0)
 #'
 #' #' # to download Vietnam only in the working directory
+#' \dontrun{
 #' vn <- gadm("Vietnam", "sf", 0, intlib = FALSE, save = TRUE)
+#' }
 #'
 #' @export
 gadm <- function(country, format, level, intlib = TRUE, save = FALSE,
@@ -129,7 +131,7 @@ gadm <- function(country, format, level, intlib = TRUE, save = FALSE,
     path <- tmp
   }
   if (is.null(save)) {
-    message(cat("\n Do you want to save the map in another location",
+    message(cat("\n Do you want to save ", file, " in another location",
                 " (yes/ no (default)) \n"))
     ans <- readline("Selection: ")
     if (ans == "yes") {
@@ -173,8 +175,8 @@ gadm <- function(country, format, level, intlib = TRUE, save = FALSE,
   # Save the file in the correct path
   file.copy(pfile, path)
   if (is.null(intlib)) {
-    message(cat("\n Do you want to download it in your internal library?",
-                "  (yes (default) / no)? \n"))
+    message(cat("\n Do you want to download ", file,
+                " in your internal library?", "  (yes (default) / no)? \n"))
     ans <- readline("Selection: ")
     if (ans == "no") {
       intlib <- FALSE

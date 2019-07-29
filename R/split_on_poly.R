@@ -24,7 +24,6 @@
 #' class(ppp2010_split)
 #' table(sapply(ppp2010_split, class))
 split_on_poly <- function(rstr, plgns) {
-  plgns %>%
-    as_list() %>%
-    lapply(., function(x) crop_on_poly(rstr, x))
+  plgns <- as_list(plgns)
+  plgns <- lapply(plgns, function(x) crop_on_poly(rstr, x))
 }

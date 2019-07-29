@@ -17,15 +17,12 @@ Crops a raster file according to a polygon
 \examples{
 
 library(sf)
-library(dplyr)
 # download vietnam admin1 administrative map in the internal library and in
 # the working direction
 vn <- sptools::gadm("vietnam", "sf", 1, intlib = TRUE, save = TRUE)
 
-provinces <- vn \%>\%
-  transmute(province = VARNAME_1) \%>\%
-  as("Spatial")
+provinces <- as(vn["VARNAME_1"], "Spatial")
 srtm <- srtmVN::getsrtm()
-hanoi <- crop_on_poly(srtm, subset(provinces, province == "Ha Noi"))
+hanoi <- crop_on_poly(srtm, subset(provinces, VARNAME_1 == "Ha Noi"))
 
 }

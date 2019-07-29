@@ -9,14 +9,13 @@
 #' @return coordinates x,y of a point
 #'
 #' @importFrom sp coordinates
-#' @importFrom magrittr %>%
 #' @export
 weighted_centroid <- function(spdt) {
-  weights <- spdt %>% # step 1
-    slot("data") %>% {. / sum(.)}
-  spdt %>%            # step 2
-    coordinates() %>%
-    as.data.frame() %>%
-    lapply(. %>% `*`(weights) %>% sum()) %>%
-    unlist()
+  weights <- slot(spdt, "data")
+  weights <- weights / sum(weights)
+  spdt <- coordinates(spdt) # step 2
+  spdt <- as.data.frame(spdt)
+  spdt <- lapply(spdt, function(x) sum(x * weights))
+  spdt <- unlist(spdt)
+  spdt
 }

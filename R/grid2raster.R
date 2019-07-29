@@ -24,8 +24,8 @@
 #'
 #'
 grid2raster <- function(grid) {
-  grid %>%
-    as.data.frame() %>%
-    move_xy() %>%
-    rasterFromXYZ(crs = proj4string(grid))
+  grid2 <- as.data.frame(grid)
+  grid2 <- move_xy(grid2)
+  grid2 <- rasterFromXYZ(grid2, crs = proj4string(grid))
+  grid2
 }
