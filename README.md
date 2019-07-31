@@ -7,6 +7,8 @@
 
 [![Travis build
 status](https://travis-ci.org/epix-project/sptools.svg?branch=master)](https://travis-ci.org/epix-project/sptools)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/epix-project/sptools?branch=master&svg=true)](https://ci.appveyor.com/project/epix-project/sptools)
 <!-- badges: end -->
 
 The goal of sptools is to provide a collection of functions to extent
