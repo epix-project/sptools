@@ -18,8 +18,12 @@ select_events <- function(hist_lst, from, to) {
   sel0 <- sel0 > as.Date(paste0(from, "-01-01")) &
     sel0 <= as.Date(paste0(to, "-12-31"))
   event_lst <- hist_lst[sel0]
-  event_lst[order(unlist(lapply(event_lst, "[[", "year")),
-                  decreasing = TRUE)]
+  if (length(event_lst) == 0) {
+    list()
+  }  else {
+    event_lst[order(unlist(lapply(event_lst, "[[", "year")),
+                    decreasing = TRUE)]
+  }
 }
 
 ################################################################################
