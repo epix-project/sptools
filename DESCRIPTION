@@ -33,7 +33,8 @@ Suggests:
     dictionary,
     srtmVN,
     worldpopVN,
-    testthat
+    testthat,
+    covr
 Remotes:
     cran/rgdal@1.3-9,
     epix-project/gadmVN,

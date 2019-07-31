@@ -10,9 +10,6 @@ init:
 install:
   ps: Bootstrap
 
-image:
-    - Visual Studio 2017
-
 #cache:
  # - C:\RLibrary
 
@@ -21,6 +18,9 @@ image:
 build_script:
   - travis-tool.sh r_binary_install proto rgdal
   - travis-tool.sh install_deps
+
+on_success:
+  - Rscript -e "covr::codecov()"
 
 test_script:
   - travis-tool.sh run_tests
