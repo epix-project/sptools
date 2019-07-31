@@ -35,10 +35,10 @@ for the time range imputed.
 \details{
 For each `split event`, the geometry of the variables contained  in the slot
 `after` is combined and rename by the variable in the slot `before`.
- For each `rename event`, the variable contained in the slot `after` is
- renamed.
- In the new rows, <NA> will be added in the other column than `sel` and
- `geometry`
+For each `rename event`, the variable contained in the slot `after` is
+renamed.
+In the new rows, <NA> will be added in the other column than `sel` and
+`geometry`
 }
 \examples{
 # to have the list of split/merge/rename event for Vietnam

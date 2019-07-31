@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' library(sf)
-#' # devtools::install_github("choisy/imhen")
+#' # devtools::install_github("epix-project/imhen")
 #' stations <- as(imhen::stations, "Spatial")
 #' stations
 #' remove_data_spatialpoints(stations)

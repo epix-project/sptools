@@ -30,13 +30,13 @@ select_events <- function(hist_lst, from, to) {
 #' Aggregates sf object
 #'
 #' Aggregates data in a select columns accordingly to a time range and by the
-#' variavbles concerned by a split/combined event and return a sf object for the
+#' variables concerned by a split/combined event and return a sf object for the
 #' time range imputed.
 #'
-#'  For each `split event`, the geometry of the variables contained  in the slot
+#' For each `split event`, the geometry of the variables contained  in the slot
 #' `after` is combined and rename by the variable in the slot `before`.
-#'  For each `rename event`, the variable contained in the slot `after` is
-#'  rename by the variable in the slot `before`.
+#' For each `rename event`, the variable contained in the slot `after` is
+#' rename by the variable in the slot `before`.
 #'
 #' @param df A sf data frame containing at least the variables \code{admin1},
 #' \code{geometry}.
@@ -57,7 +57,7 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 
     # For the complex merge event
     if (event$event %in% c("complex merge", "merge") &
-        any(grepl("d.bef|d.aft",names(event)))) {
+        any(grepl("d.bef|d.aft", names(event)))) {
       suppressWarnings(tmp <-  split(df, f = df[, col_name, drop = TRUE] %in%
                                        unlist(event$after)))
       # calculate the new geometry and update the new spatial definition (name
@@ -125,10 +125,10 @@ aggregate_sf <- function(df, event_lst, col_name, col_name2 = NULL) {
 #'
 #' For each `split event`, the geometry of the variables contained  in the slot
 #' `after` is combined and rename by the variable in the slot `before`.
-#'  For each `rename event`, the variable contained in the slot `after` is
-#'  renamed.
-#'  In the new rows, <NA> will be added in the other column than `sel` and
-#'  `geometry`
+#' For each `rename event`, the variable contained in the slot `after` is
+#' renamed.
+#' In the new rows, <NA> will be added in the other column than `sel` and
+#' `geometry`
 #'
 #' @param df_sf A sf data frame containing at least the variables
 #' \code{admin1}, \code{geometry} and \code{admin2} if `history_lst`
@@ -165,9 +165,9 @@ sf_aggregate_lst <- function(df_sf, history_lst, from, to = "2018-12-31") {
   names_lst <- lapply(select_events(history_lst, from, to), names)
   if (any(grepl("complex|merge", event_lst)) &
       any(grepl("d.before", names_lst))) {
-   sel <- c("admin1", "admin2")
-   col_name <- "admin1"
-   col_name2 <- "admin2"
+    sel <- c("admin1", "admin2")
+    col_name <- "admin1"
+    col_name2 <- "admin2"
   } else {
     sel <- "admin1"
     col_name <- "admin1"
