@@ -9,3 +9,12 @@ before_install:
   - sudo apt-get --yes --force-yes update -qq
   - sudo apt-get install --yes libudunits2-dev libproj-dev libgeos-dev libgdal-dev
   - sudo ldconfig
+
+r_packages:
+  - devtools
+  - maptools
+  - sp
+  - rgdal
+  - roxygen2
+  - rmarkdown
+  - covr
