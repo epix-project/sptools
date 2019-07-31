@@ -40,7 +40,7 @@ add_from_raster <- function(sptsdf, rstr, varname = "new_data") {
   # test if object superpose
   overlap <- try(raster::intersect(rstr, sptsdf), silent = TRUE)
   if (class(overlap) == "try-error") stop("objects extents do not overlap")
-  sptsdf %<>% spTransform(proj4string(rstr))
+  sptsdf <-  spTransform(sptsdf, proj4string(rstr))
   if (class(sptsdf) == "SpatialPoints") {
     df <- data.frame(varname = raster::extract(rstr, sptsdf))
     names(df)[which(names(df) == "varname")] <- varname
