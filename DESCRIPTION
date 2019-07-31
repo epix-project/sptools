@@ -34,7 +34,7 @@ Suggests:
     srtmVN,
     worldpopVN,
     testthat
-Remote:
+Remotes:
     epix-project/gadmVN,
     epix-project/imhen,
     epix-project/dictionary,
