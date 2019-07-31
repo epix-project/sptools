@@ -22,7 +22,7 @@ The goal of sptools is to provide a collection of functions to extent the [sp](h
 
 ## Installation
 
-You can the development version  of the package from [GitHub](https://github.com/) with:
+You can install the development version  of the package from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")

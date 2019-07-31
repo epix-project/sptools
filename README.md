@@ -16,7 +16,7 @@ packages
 
 ## Installation
 
-You can the development version of the package from
+You can install the development version of the package from
 [GitHub](https://github.com/) with:
 
 ``` r
