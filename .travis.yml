@@ -13,15 +13,3 @@ before_install:
   - sudo ldconfig
 
 warnings_are_errors: true
-
-r_packages:
-  - devtools
-  - maptools
-  - sp
-  - rgdal
-  - roxygen2
-  - rmarkdown
-  - covr
-
-r_build_args: "--no-build-vignettes"
-r_check_args: "--no-examples --no-tests --no-vignettes --no-build-vignettes"
