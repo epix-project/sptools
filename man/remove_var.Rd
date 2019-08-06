@@ -19,7 +19,7 @@ Removes variable(s) from a Spatial*DataFrame
 }
 \examples{
 # An example with a SpatialPointsDataFrame object:
-# devtools::install_github("marc/imhen")
+# devtools::install_github("epix-project/imhen")
 library(sf)
 stations <- as(imhen::stations, "Spatial")
 stations
