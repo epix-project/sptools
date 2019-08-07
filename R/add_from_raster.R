@@ -14,7 +14,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' library(sp)
 #'
 #' # download vietnam country administrative map in the internal library and in
@@ -34,7 +33,6 @@
 #' value <- add_from_raster(value, srtmVN::getsrtm(), "elevation")
 #'
 #' head(value@data)
-#' }
 add_from_raster <- function(sptsdf, rstr, varname = "new_data") {
 # Note that we chose to project the SpatialPointsDataFrame instead of the
 # RasterLayer because it is much quicker this way.

@@ -20,7 +20,6 @@ A \code{SpatialPointsDataFrame} object.
 Based on the \code{\link[raster]{extract}} function.
 }
 \examples{
-\dontrun{
 library(sp)
 
 # download vietnam country administrative map in the internal library and in
@@ -40,5 +39,4 @@ value <- SpatialPoints(value, proj4string = vn@proj4string, bbox = vn@bbox)
 value <- add_from_raster(value, srtmVN::getsrtm(), "elevation")
 
 head(value@data)
-}
 }
