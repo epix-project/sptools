@@ -40,4 +40,8 @@ test_that("`sf_aggregate_lst` returns the correct output", {
   test3 <- sf_aggregate_lst(sf3, th_history, from = "1980-01-01")
   testthat::expect_equal(match_pattern(as.data.frame(test3), "admin1",
                                        th_admin1_year), "1977-1981")
+
+  testthat::expect_equal(sptools:::select_events(dictionary::kh_history, 2020,
+                                                 2020), list())
+
 })
