@@ -28,5 +28,4 @@ You can install the development version of the package from
 ``` r
 # install.packages("devtools")
 devtools::install_github("epix-project/sptools")
->>>>>>> dc5358f4c75ea72c06546c97db68d2ab3f5b37cb
 ```
