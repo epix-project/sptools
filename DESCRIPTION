@@ -19,13 +19,6 @@ LazyData: true
 RoxygenNote: 6.1.1
 Depends:
     R (>= 2.10)
-Suggests: 
-    gadmVN,
-    imhen,
-    dictionary,
-    srtmVN,
-    worldpopVN,
-    testthat
 Imports: 
     maptools,
     rgeos, 
@@ -34,3 +27,18 @@ Imports:
     methods,
     sf,
     raster
+Suggests: 
+    gadmVN,
+    imhen,
+    dictionary,
+    srtmVN,
+    worldpopVN,
+    testthat,
+    covr,
+    rgdal
+Remotes:
+    epix-project/gadmVN,
+    epix-project/imhen,
+    epix-project/dictionary,
+    epix-project/srtmVN,
+    epix-project/worldpopVN

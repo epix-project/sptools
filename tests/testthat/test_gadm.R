@@ -1,4 +1,4 @@
-library(dictionary) # for "XX_history", "XX_province"
+library(dictionary) # for "**_history", "**_province"
 context("`gadm`")
 
 testthat::test_that("`gadm` has the correct behaviour", {
